@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - what they say while you stall.
+ * ADMISSIONS! - what they say while you stall.
  *
  * The interruption cannot be dismissed, closed, or waited out. Trying to get
  * past it escalates through these, and so does simply sitting there.

@@ -1,4 +1,4 @@
-# CONFIRMATION BIAS
+# ADMISSIONS!
 
 A browser game in which you run a UK admissions office for one recruitment cycle.
 

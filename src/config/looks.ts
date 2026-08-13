@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - how people are drawn.
+ * ADMISSIONS! - how people are drawn.
  *
  * A small palette, combined per character in `cast.ts`. Nothing in here is
  * coded to a gender: any hair goes with any pronoun, any collar with any role.

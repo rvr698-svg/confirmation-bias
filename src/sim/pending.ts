@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - what is still in the post.
+ * ADMISSIONS! - what is still in the post.
  *
  * Everything you decide lands three to five turns later, and until now the
  * game told you only how many things were coming, not what they were. This

@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the tannoy.
+ * ADMISSIONS! - the tannoy.
  *
  * One announcement at the top of every turn, from an institution that has
  * decided everything is going well. It reacts to the real position, so it is

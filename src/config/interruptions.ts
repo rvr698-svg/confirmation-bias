@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - bright ideas.
+ * ADMISSIONS! - bright ideas.
  *
  * A senior colleague appears at your desk with an initiative. They are not
  * malicious and the idea is not always stupid. It is simply arriving in

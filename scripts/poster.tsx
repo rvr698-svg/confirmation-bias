@@ -52,7 +52,7 @@ function pips(done: number, x: number, y: number, w: number, gap: number): strin
     .join('')
 }
 
-const TITLE = 'CONFIRMATION BIAS'
+const TITLE = 'ADMISSIONS!'
 
 /** Marge's line on the poster. One of her real ones, from `config/mascot.ts`. */
 const QUOTE = 'Somebody is going to ask me about this in a meeting, and it will be a big meeting.'
@@ -101,6 +101,16 @@ const SQUARE_MOODS: { mood: Mood; cups: number; name: string }[] = [
   { mood: 'keen', cups: 1, name: 'poster-square-keen' },
 ]
 
+/** The game's button, drawn. A poster with a button on it is a game poster. */
+const playButton = (x: number, y: number, w: number, h: number, size: number) => `
+  <g>
+    <rect x="${x + 6}" y="${y + 8}" width="${w}" height="${h}" rx="16" fill="${PALETTE.ink}"/>
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="16" fill="${PALETTE.gold}" stroke="${PALETTE.ink}" stroke-width="5"/>
+    <path d="M ${x + 34} ${y + h / 2 - 15} l 26 15 l -26 15 z" fill="${PALETTE.ink}"/>
+    <text x="${x + 78}" y="${y + h / 2 + size * 0.36}" font-family="${FONT}" font-size="${size}"
+      letter-spacing="3" font-weight="700" fill="${PALETTE.ink}">PLAY IT FREE</text>
+  </g>`
+
 const bubble = (x: number, y: number, w: number, h: number) => `
   <g>
     <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="34"
@@ -118,8 +128,8 @@ const square = (mood: Mood, cupCount: number, name: string): Poster => ({
   <rect width="1200" height="1200" fill="${PALETTE.brand}"/>
 
   <text x="90" y="132" font-family="${FONT}" font-size="27" letter-spacing="7"
-    fill="rgba(255,255,255,0.85)" font-weight="600">TEN TURNS. ONE ADMISSIONS CYCLE.</text>
-  <text x="90" y="228" font-family="${FONT}" font-size="80" letter-spacing="5"
+    fill="rgba(255,255,255,0.85)" font-weight="600">A BROWSER GAME ABOUT RUNNING A UNIVERSITY</text>
+  <text x="90" y="238" font-family="${FONT}" font-size="96" letter-spacing="4"
     fill="#fff" font-weight="700">${TITLE}</text>
 
   ${bubble(500, 300, 630, 372)}
@@ -130,12 +140,16 @@ const square = (mood: Mood, cupCount: number, name: string): Poster => ({
 
   <rect x="90" y="880" width="1020" height="4" fill="rgba(255,255,255,0.25)"/>
 
-  <text x="90" y="962" font-family="${FONT}" font-size="40" fill="#fff" font-weight="600">How hard can it be?</text>
-  <text x="90" y="1018" font-family="${FONT}" font-size="40" fill="rgba(255,255,255,0.88)">Ten minutes to find out.</text>
+  <text x="90" y="950" font-family="${FONT}" font-size="42" fill="#fff" font-weight="600">How hard can it be?</text>
+  <text x="90" y="1004" font-family="${FONT}" font-size="42" fill="rgba(255,255,255,0.88)">Ten minutes to find out.</text>
 
-  ${pips(6, 90, 1074, 74, 14)}
+  <text x="90" y="1064" font-family="${FONT}" font-size="20" letter-spacing="5"
+    fill="rgba(255,255,255,0.7)" font-weight="700">TURN 6 OF 10 &#183; FEBRUARY</text>
+  ${pips(6, 90, 1080, 50, 10)}
 
-  <text x="90" y="1152" font-family="${FONT}" font-size="31" fill="#fff" font-weight="700">confirmationbias.netlify.app</text>
+  ${playButton(700, 1032, 410, 92, 32)}
+
+  <text x="90" y="1160" font-family="${FONT}" font-size="27" fill="rgba(255,255,255,0.85)">admissionsgame.netlify.app</text>
 </svg>`,
 })
 
@@ -154,16 +168,19 @@ const POSTERS: Poster[] = [
   ${cups(3, 108, 520, 1.2)}
 
   <text x="415" y="132" font-family="${FONT}" font-size="22" letter-spacing="6"
-    fill="rgba(255,255,255,0.85)" font-weight="600">TEN TURNS. ONE ADMISSIONS CYCLE.</text>
-  <text x="415" y="212" font-family="${FONT}" font-size="66" letter-spacing="4"
+    fill="rgba(255,255,255,0.85)" font-weight="600">A BROWSER GAME ABOUT RUNNING A UNIVERSITY</text>
+  <text x="415" y="216" font-family="${FONT}" font-size="76" letter-spacing="3"
     fill="#fff" font-weight="700">${TITLE}</text>
 
-  <text x="415" y="300" font-family="${FONT}" font-size="34" fill="#fff" font-weight="600">How hard can it be?</text>
-  <text x="415" y="350" font-family="${FONT}" font-size="34" fill="rgba(255,255,255,0.88)">Ten minutes to find out.</text>
+  <text x="415" y="298" font-family="${FONT}" font-size="34" fill="#fff" font-weight="600">How hard can it be? Ten minutes to find out.</text>
 
-  ${pips(6, 415, 410, 58, 11)}
+  <text x="415" y="356" font-family="${FONT}" font-size="17" letter-spacing="4"
+    fill="rgba(255,255,255,0.7)" font-weight="700">TURN 6 OF 10 &#183; FEBRUARY</text>
+  ${pips(6, 415, 370, 58, 11)}
 
-  <text x="415" y="520" font-family="${FONT}" font-size="28" fill="#fff" font-weight="700">confirmationbias.netlify.app</text>
+  ${playButton(415, 432, 360, 80, 28)}
+
+  <text x="800" y="482" font-family="${FONT}" font-size="23" fill="rgba(255,255,255,0.85)">admissionsgame.netlify.app</text>
 </svg>`,
   },
 ]

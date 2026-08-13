@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the event library.
+ * ADMISSIONS! - the event library.
  *
  * Authored, not random. The randomness is in which of these fire and when,
  * inside their window. Every one of them has happened to somebody.

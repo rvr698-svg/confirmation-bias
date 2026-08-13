@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the five measures.
+ * ADMISSIONS! - the five measures.
  *
  * Internally each measure resolves to 0-100. The player never sees that number.
  * They see a band, because a band is what an executive summary would give you

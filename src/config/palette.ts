@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the colourway.
+ * ADMISSIONS! - the colourway.
  *
  * One source for every colour in the game, so a recolour is one file rather
  * than a hunt through SVGs. The CSS custom properties in `styles/base.css`

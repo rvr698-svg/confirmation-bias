@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - picking the announcement.
+ * ADMISSIONS! - picking the announcement.
  *
  * Reads the same position the dashboard reads, picks the first line whose
  * situation is true, and falls back to filler so a quiet cycle is not the same

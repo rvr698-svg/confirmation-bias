@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - splitting the intake across five departments.
+ * ADMISSIONS! - splitting the intake across five departments.
  *
  * Derived, not managed. The player never recruits a subject directly; the
  * subjects respond to the cycle they were given. Nothing here feeds back into

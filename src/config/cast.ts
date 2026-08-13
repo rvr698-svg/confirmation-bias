@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the cast.
+ * ADMISSIONS! - the cast.
  *
  * Who the twelve interrupting colleagues are, and how they are drawn. Kept
  * apart from `interruptions.ts` so the words and the people can be reviewed

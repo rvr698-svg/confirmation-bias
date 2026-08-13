@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the debrief.
+ * ADMISSIONS! - the debrief.
  *
  * The most important screen in the game, so it does not guess. For every
  * choice the player made, it lifts that choice's entries out of the modifier

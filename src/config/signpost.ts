@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the way out.
+ * ADMISSIONS! - the way out.
  *
  * The end of the debrief, chosen by how the cycle actually went. It is an
  * advert and it does not pretend otherwise: the player has just spent ten turns

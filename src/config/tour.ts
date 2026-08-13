@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the three things you need to know.
+ * ADMISSIONS! - the three things you need to know.
  *
  * Testers were missing the rail entirely: they never opened the team panel and
  * then wondered, in the debrief, why half the team had left. Three steps, no

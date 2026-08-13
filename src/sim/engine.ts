@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the simulation engine.
+ * ADMISSIONS! - the simulation engine.
  *
  * The whole model is a pure function of the modifier queue. Nothing is
  * incrementally mutated, so there is no drift and no hidden state. To know the

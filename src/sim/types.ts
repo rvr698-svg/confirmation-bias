@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - shared simulation types.
+ * ADMISSIONS! - shared simulation types.
  *
  * The important idea in this file is ModifierEntry. A decision never changes a
  * number now. It puts an entry on a queue with a delay. The engine recomputes

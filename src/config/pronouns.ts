@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - pronouns.
+ * ADMISSIONS! - pronouns.
  *
  * Every line the game writes about a person is built from one of these sets,
  * so a colleague cannot be "she" in her own copy and "he" in the line

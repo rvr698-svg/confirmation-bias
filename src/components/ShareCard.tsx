@@ -41,7 +41,7 @@ export function shareText(card: Scorecard, position: Position): string {
   const target = fmt(position.measures.target)
 
   return [
-    'CONFIRMATION BIAS  |  one admissions cycle, ten turns',
+    'ADMISSIONS!  |  one cycle, ten turns',
     '',
     rows,
     '',

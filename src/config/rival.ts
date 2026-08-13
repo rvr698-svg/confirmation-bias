@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the provider down the road.
+ * ADMISSIONS! - the provider down the road.
  *
  * Recruitment is zero-sum and everybody knows who they are losing to. The
  * rival exists so the world pushes back rather than only raining on you: they

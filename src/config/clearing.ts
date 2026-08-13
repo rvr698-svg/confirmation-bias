@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - Clearing.
+ * ADMISSIONS! - Clearing.
  *
  * The one part of the cycle that happens in real time. Nine turns of decisions
  * that land three months later, and then this: a phone that will not stop, and

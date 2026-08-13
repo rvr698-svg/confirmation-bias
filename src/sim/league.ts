@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the table.
+ * ADMISSIONS! - the table.
  *
  * A proxy league position from four things: entry standards, completion, spend
  * per student, and how much trouble you are in. It is the old entry profile

@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the decision library.
+ * ADMISSIONS! - the decision library.
  *
  * Every option writes to the modifier queue with an explicit delay. Nothing
  * here changes a number on the turn it is chosen unless the delay is 0, and

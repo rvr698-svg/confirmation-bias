@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the subject mix.
+ * ADMISSIONS! - the subject mix.
  *
  * Your intake is not one number, it is five departments who each think they
  * are the important one. The split is derived from the intake you already

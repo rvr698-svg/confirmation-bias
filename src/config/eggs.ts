@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the hidden bits.
+ * ADMISSIONS! - the hidden bits.
  *
  * Three things reward a player who pokes the screen instead of reading it.
  * None of them touches the model, the scoring or the queue: they are jokes,

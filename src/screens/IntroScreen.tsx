@@ -31,7 +31,7 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
             <span className="eyebrow">
               A management game about a job where nothing you do shows up for three months
             </span>
-            <h1 className="title">Confirmation Bias</h1>
+            <h1 className="title">Admissions!</h1>
           </div>
         </div>
         <hr className="rule" />

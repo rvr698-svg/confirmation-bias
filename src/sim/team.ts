@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - who is still here.
+ * ADMISSIONS! - who is still here.
  *
  * Turns the team level into four people. Derived: the roster reads the lever
  * and the queue, and never writes to either, so the pipeline, the scoring and

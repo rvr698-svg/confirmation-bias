@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - simulation constants.
+ * ADMISSIONS! - simulation constants.
  *
  * Every displayed figure in the game derives from this file. Nothing numeric is
  * hard-coded in a component. Expect to tune these repeatedly.

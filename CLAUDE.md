@@ -5,7 +5,7 @@ change that makes a line here untrue.
 
 ## What this is
 
-**Confirmation Bias** — a browser game about running a UK admissions office for one recruitment cycle.
+**Admissions!** — a browser game about running a UK admissions office for one recruitment cycle.
 Ten turns, September to Clearing. Single page React 19 + TypeScript + Vite. No backend, no accounts,
 no storage, no analytics, no personal data. All state lives in React for the session.
 

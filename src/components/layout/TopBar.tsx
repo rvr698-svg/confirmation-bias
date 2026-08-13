@@ -14,7 +14,7 @@ export default function TopBar({
 }) {
   return (
     <header className="topbar">
-      <span className="wordmark">Confirmation Bias</span>
+      <span className="wordmark">Admissions!</span>
       <span className="topbar-note" title={DISCLAIMER_LONG}>
         {DISCLAIMER_SHORT}
       </span>

@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS
+ * ADMISSIONS!
  *
  * Routing between the three screens and nothing else. All state is held here
  * for the session. Nothing is written to storage, nothing leaves the browser,

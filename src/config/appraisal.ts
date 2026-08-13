@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - two lines for your appraisal.
+ * ADMISSIONS! - two lines for your appraisal.
  *
  * Banded by thirds like the signpost, and drawn from a pool inside the band so
  * that two people who both scored 3 out of 5 do not read each other's line and

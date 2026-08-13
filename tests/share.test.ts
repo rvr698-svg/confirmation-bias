@@ -27,19 +27,19 @@ afterEach(() => vi.unstubAllGlobals())
 
 describe('sharing', () => {
   it('shows the result on screen without an advert in it', () => {
-    withOrigin('https://confirmationbias.netlify.app', () => {
+    withOrigin('https://admissionsgame.netlify.app', () => {
       const onScreen = shareText(card, position)
-      expect(onScreen).toContain('CONFIRMATION BIAS')
+      expect(onScreen).toContain('ADMISSIONS!')
       expect(onScreen).not.toMatch(/netlify|Fancy a go/)
     })
   })
 
   it('adds the invitation on the way to the clipboard', () => {
-    withOrigin('https://confirmationbias.netlify.app', () => {
+    withOrigin('https://admissionsgame.netlify.app', () => {
       const pasted = shareForClipboard(card, position)
       expect(pasted.startsWith(shareText(card, position))).toBe(true)
       expect(pasted).toContain('Fancy a go at it yourself?')
-      expect(pasted).toContain('https://confirmationbias.netlify.app')
+      expect(pasted).toContain('https://admissionsgame.netlify.app')
     })
   })
 
@@ -56,7 +56,7 @@ describe('sharing', () => {
   })
 
   it('keeps the result readable when pasted as plain text', () => {
-    withOrigin('https://confirmationbias.netlify.app', () => {
+    withOrigin('https://admissionsgame.netlify.app', () => {
       const lines = shareForClipboard(card, position).split('\n')
       expect(lines.length).toBeGreaterThan(6)
       for (const line of lines) expect(line.length).toBeLessThan(80)

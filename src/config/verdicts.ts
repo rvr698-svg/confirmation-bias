@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the last thing you read.
+ * ADMISSIONS! - the last thing you read.
  *
  * Written in the institution's own voice: the newsletter, the press office and
  * the board paper, all of which have already decided this was a success. The

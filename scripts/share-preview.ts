@@ -6,4 +6,4 @@ import { shareText } from '../src/components/ShareCard'
 const p = computePosition([], 10)
 console.log(shareText(scorecard(p, 7), p))
 console.log('')
-console.log('Fancy a go at it yourself? https://confirmationbias.netlify.app')
+console.log('Fancy a go at it yourself? https://admissionsgame.netlify.app')

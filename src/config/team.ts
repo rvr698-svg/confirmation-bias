@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the four people who actually do it.
+ * ADMISSIONS! - the four people who actually do it.
  *
  * Team capacity used to be a bar that went down, which meant spending it cost
  * the player nothing they could feel. It is the same lever underneath; what

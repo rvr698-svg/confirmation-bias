@@ -1,5 +1,5 @@
 /**
- * CONFIRMATION BIAS - the Clearing calls.
+ * ADMISSIONS! - the Clearing calls.
  *
  * Turns the authored call pool into ordinary decisions, so the engine, the
  * debrief, the harness and the acceptance tests all treat a phone call exactly
