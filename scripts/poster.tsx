@@ -7,6 +7,9 @@
  * changes with it.
  *
  *   npx vite-node scripts/poster.tsx
+ *
+ * Output goes to assets/social, which is deliberately not in the repository.
+ * Needs sharp, which is not a dependency: npm i --no-save sharp
  */
 
 import { renderToStaticMarkup } from 'react-dom/server'

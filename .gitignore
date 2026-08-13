@@ -8,3 +8,6 @@ dist/
 
 # personal, not the project
 .claude/settings.local.json
+
+# marketing drafts and social assets, not for the public repo
+assets/social/
