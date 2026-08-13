@@ -17,6 +17,9 @@ const newSeed = () => Math.floor(Math.random() * 2 ** 31)
 
 export default function App() {
   const [state, setState] = useState<GameState>(() => createInitialState(newSeed()))
+  // Shown once per session on the first turn. Nothing is stored, so a reload
+  // is a fresh start in this as in everything else.
+  const [tourDone, setTourDone] = useState(false)
 
   function commit({ choices, eventChoices, ideaChoice }: TurnAnswers) {
     const committed = commitTurn(state, choices, eventChoices, ideaChoice)
@@ -33,5 +36,13 @@ export default function App() {
 
   // Keyed on the turn so each turn gets a fresh screen, and this turn's answers
   // are cleared by unmounting rather than by remembering to clear them.
-  return <TurnScreen key={`${state.turn}-${state.turnPhase}`} state={state} onCommit={commit} />
+  return (
+    <TurnScreen
+      key={`${state.turn}-${state.turnPhase}`}
+      state={state}
+      onCommit={commit}
+      showTour={state.turn === 1 && !tourDone}
+      onTourDone={() => setTourDone(true)}
+    />
+  )
 }

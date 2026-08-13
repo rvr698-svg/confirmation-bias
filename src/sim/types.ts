@@ -153,13 +153,19 @@ export interface ScoredMeasure {
   band: Band
   /** 0-100, internal. Never shown as a raw number. */
   score: number
+  /** What the player is shown: 1 to 5. */
+  of5: number
   detail: string
 }
 
 export interface Scorecard {
   measures: ScoredMeasure[]
   overall: number
+  /** Out of five, averaged and rounded. The headline. */
+  overallOf5: number
   verdict: string
+  /** Two lines you could paste into an appraisal without lying. */
+  appraisal: [string, string]
 }
 
 export interface CapacityBreach {

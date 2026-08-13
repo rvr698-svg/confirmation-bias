@@ -11,7 +11,7 @@ no storage, no analytics, no personal data. All state lives in React for the ses
 
 ```bash
 npm run dev        # port 5273 (5173 is taken by another project on this machine)
-npm test           # 84 tests, including the acceptance criteria
+npm test           # 92 tests, including the acceptance criteria
 npm run harness    # 700 headless playthroughs, tuning report
 npm run build      # tsc -b && vite build
 ```
@@ -55,7 +55,7 @@ One clear job per file. If a file starts doing two things, split it.
 | `league.ts` | The proxy league position: entry standards, completion, spend per student |
 | `subjects.ts` | Splits the intake across five departments. Derived, never a lever |
 | `tannoy.ts` | Picks the announcement for the turn |
-| `scoring.ts` | The five measures into bands and a verdict |
+| `scoring.ts` | The five measures into scores out of five, a verdict and an appraisal |
 | `debrief.ts` | Counterfactual rerun per choice |
 | `playthrough.ts` | Headless runner used by tests and the harness |
 | `strategies.ts` | Named bot strategies for the harness |
@@ -79,9 +79,12 @@ One clear job per file. If a file starts doing two things, split it.
 | `verdicts.ts` | The final line and the breach lines, in the institution's own voice |
 | `clearing.ts` | The clock, and the pool of Clearing calls |
 | `team.ts` | The four people, their thresholds, and who an event signs off |
-| `rival.ts` | The provider down the road. Name needs sign-off |
+| `rival.ts` | The provider down the road. Name signed off |
 | `eggs.ts` | The three hidden jokes |
 | `palette.ts` | The colourway. Every colour in the game, including the SVGs |
+| `appraisal.ts` | Two appraisal lines, banded by thirds, pooled so they vary |
+| `signpost.ts` | The end-of-game signpost, by score band |
+| `tour.ts` | The three steps a new player is shown |
 
 ### Screens — `src/screens/`
 
@@ -100,6 +103,7 @@ One clear job per file. If a file starts doing two things, split it.
 | `layout/ActionBar.tsx` | The always-visible way out of a turn |
 | `layout/Tannoy.tsx` | The announcement. Click the horn |
 | `layout/Disclaimer.tsx` | For fun, not a commentary. Intro, top bar and debrief |
+| `layout/Tour.tsx` | Three rings round three real elements, once per session |
 | `rail/StatusRail.tsx` | Composes the left rail |
 | `rail/ProjectionPanel.tsx` | Projected intake and confidence bars |
 | `rail/PipelinePanel.tsx` | The pipeline as it stands |
@@ -114,6 +118,8 @@ One clear job per file. If a file starts doing two things, split it.
 | `turn/ExecModal.tsx` | The interruption. Covers the board, cannot be dismissed |
 | `turn/ClearingClock.tsx` | The countdown. The only thing that moves on its own |
 | `SubjectTable.tsx` | Who actually turned up, for the debrief |
+| `ScoreRow.tsx` | One measure, out of five |
+| `Signpost.tsx` | The way out, chosen by how the cycle went |
 | `DecisionCard.tsx` / `EventCard.tsx` | Card contents only. The frame belongs to the deck |
 | `Mascot.tsx` / `MascotBar.tsx` | Marge. `compact` is the rail version |
 | `art/ExecFigure.tsx` | The man with the idea, drawn once |
@@ -130,9 +136,10 @@ start folded on a short window.
 
 ## Rules
 
-1. **A turn never scrolls.** `.play` is fixed to the viewport: bar, rail, card, action bar. If
-   something new does not fit, compress it in the `max-height: 820px` block or fold it away. Do not
-   let the document grow. The intro and the debrief are documents and may scroll.
+1. **A turn never scrolls, at any width.** `.play` is fixed to the viewport and capped to it: bar,
+   rail, card, action bar. If something new does not fit, compress it in the `max-height: 820px`
+   block or fold it away. On phones the rail lies down as a swipeable strip and the pips go — check
+   375px before shipping a layout change. The intro and the debrief are documents and may scroll.
 2. **No numeric literals in components.** Every displayed figure derives from `src/config/`. This is
    an acceptance criterion with a test behind it.
 3. **The interruption blocks.** It is a modal over everything, it takes focus, and Escape, the scrim

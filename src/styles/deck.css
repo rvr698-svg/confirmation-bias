@@ -426,3 +426,61 @@
     padding: 7px 9px;
   }
 }
+
+/* Phones. Finger-sized targets, and the card keeps the space. */
+@media (max-width: 640px) {
+  .deck-card {
+    padding: 12px 14px 14px;
+    border-width: 2px;
+  }
+  .deck-card.is-decision,
+  .deck-card.is-event {
+    border-left-width: 6px;
+  }
+  .deck-card-head {
+    margin-bottom: 8px;
+  }
+  .deck-kicker {
+    font-size: 10px;
+    padding: 2px 9px;
+  }
+  .card-q {
+    font-size: 17px;
+  }
+  .card-context {
+    font-size: 13.5px;
+  }
+  .options {
+    margin-top: 12px;
+    gap: 8px;
+  }
+  .option {
+    padding: 11px 13px;
+    min-height: 46px;
+  }
+  .option-label {
+    font-size: 14px;
+  }
+  .option-blurb {
+    font-size: 12.5px;
+  }
+  .deck-tab {
+    min-height: 34px;
+    min-width: 34px;
+    justify-content: center;
+  }
+  .step {
+    width: 46px;
+    height: 38px;
+  }
+  .clearing-clock {
+    padding: 6px 12px;
+    gap: 10px;
+  }
+  .clock-face {
+    font-size: 24px;
+  }
+  .clock-rule {
+    display: none;
+  }
+}

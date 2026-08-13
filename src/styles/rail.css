@@ -529,6 +529,42 @@
   }
 }
 
+/* Phones: the strip stays, tighter, and the panels stay wide enough to read. */
+@media (max-width: 640px) {
+  .rail {
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+  .rail-panel,
+  .chips,
+  .warn-strip {
+    min-width: 210px;
+  }
+  .panel {
+    padding: 10px 12px;
+    border-width: 2px;
+  }
+  .forecast-value {
+    font-size: 30px;
+  }
+  .chips {
+    grid-template-columns: repeat(2, 118px);
+    gap: 6px;
+  }
+  .chip {
+    padding: 6px 8px;
+  }
+  .chip-label {
+    font-size: 9px;
+  }
+  .chip-value {
+    font-size: 12.5px;
+  }
+  .mascot-bar.compact {
+    min-width: 250px;
+  }
+}
+
 /* Lying down: rail becomes a strip across the top. The pipeline detail is the
    first thing to go, because the projection and the chips are the read. */
 @media (max-width: 1040px) {

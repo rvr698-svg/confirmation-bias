@@ -9,22 +9,17 @@
 import { buildDebrief } from '../sim/debrief'
 import { breachSummary } from '../sim/scoring'
 import { turnLabel } from '../sim/engine'
-import { TOTAL_TURNS } from '../config/config'
-import type { BandKey, GameState } from '../sim/types'
+import { STARS_MAX, TOTAL_TURNS } from '../config/config'
+import type { GameState } from '../sim/types'
 import { subjectMix } from '../sim/subjects'
 import SubjectTable from './SubjectTable'
+import ScoreRow from './ScoreRow'
+import Signpost from './Signpost'
 import ShareCard from './ShareCard'
 import Disclaimer from './layout/Disclaimer'
 import MascotBar, { moodAtEnd } from './MascotBar'
 
 const fmt = (n: number) => Math.round(n).toLocaleString('en-GB')
-
-const BAND_CLASS: Record<BandKey, string> = {
-  strong: 'band-strong',
-  holding: 'band-holding',
-  pressure: 'band-pressure',
-  exposed: 'band-exposed',
-}
 
 export default function Debrief({
   state,
@@ -92,14 +87,26 @@ export default function Debrief({
         <div className="verdict">{card.verdict}</div>
       </div>
 
-      <div className="bands">
+      <div className="scores">
+        <div className="scores-head">
+          <span className="eyebrow">The five measures</span>
+          <span className="scores-overall">
+            <strong>{card.overallOf5}</strong>
+            <span className="score-max">/{STARS_MAX}</span> overall
+          </span>
+        </div>
         {card.measures.map((m) => (
-          <div className="band-row" key={m.id}>
-            <span className="band-name">{m.name}</span>
-            <span className={`band-tag ${BAND_CLASS[m.band.key]}`}>{m.band.label}</span>
-            <span className="band-detail">{m.detail}</span>
-          </div>
+          <ScoreRow measure={m} key={m.id} />
         ))}
+      </div>
+
+      <div className="appraisal">
+        <span className="eyebrow">For your appraisal</span>
+        <p className="appraisal-line">{card.appraisal[0]}</p>
+        <p className="appraisal-line development">{card.appraisal[1]}</p>
+        <p className="appraisal-foot">
+          Both of those are true. That is what makes them usable.
+        </p>
       </div>
 
       <div className="section">
@@ -208,6 +215,8 @@ export default function Debrief({
           A new cycle draws different events. {TOTAL_TURNS} turns, eight to twelve minutes.
         </span>
       </div>
+
+      <Signpost overallOf5={card.overallOf5} onRestart={onRestart} />
 
       <Disclaimer compact />
     </div>

@@ -329,6 +329,34 @@ export const TOTAL_TURNS = TURNS.length
 
 /** Bands. No raw scores are ever shown to the player. */
 /**
+ * Five measures, each out of five, because a band name alone made people ask
+ * "is Broadly on track good?". The band still carries the joke; the number
+ * carries the meaning.
+ */
+/**
+ * The five measures: what they are called on the scorecard, and how they read
+ * inside a sentence. "Sustaining performance on intake against target" is not
+ * English; "sustaining performance on the intake number" is.
+ */
+export const MEASURE_NAMES: Record<string, { name: string; inSentence: string }> = {
+  intake: { name: 'Intake against target', inSentence: 'the intake number' },
+  league: { name: 'League table position', inSentence: 'the league table position' },
+  access: { name: 'Access and participation', inSentence: 'access and participation' },
+  budget: { name: 'Budget position', inSentence: 'the budget position' },
+  team: { name: 'Team capacity and wellbeing', inSentence: 'team capacity' },
+}
+
+export const STARS: { min: number; of5: number }[] = [
+  { min: 78, of5: 5 },
+  { min: 64, of5: 4 },
+  { min: 50, of5: 3 },
+  { min: 32, of5: 2 },
+  { min: 0, of5: 1 },
+]
+
+export const STARS_MAX = 5
+
+/**
  * The bands, in the words the sector actually uses when it is being polite
  * about a disaster. Nobody has ever written "we failed" in a board paper.
  */

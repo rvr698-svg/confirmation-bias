@@ -22,6 +22,7 @@ import type { GameState } from '../sim/types'
 import { buildDeck, useTurnDeck } from '../hooks/useTurnDeck'
 import TopBar from '../components/layout/TopBar'
 import Tannoy from '../components/layout/Tannoy'
+import Tour from '../components/layout/Tour'
 import ActionBar from '../components/layout/ActionBar'
 import StatusRail from '../components/rail/StatusRail'
 import TurnDeck from '../components/turn/TurnDeck'
@@ -38,9 +39,14 @@ export interface TurnAnswers {
 export default function TurnScreen({
   state,
   onCommit,
+  showTour = false,
+  onTourDone,
 }: {
   state: GameState
   onCommit: (answers: TurnAnswers) => void
+  /** Three steps on the first turn, so the rail is not missed. */
+  showTour?: boolean
+  onTourDone?: () => void
 }) {
   const [choices, setChoices] = useState<Record<string, string>>({})
   const [eventChoices, setEventChoices] = useState<Record<string, string>>({})
@@ -76,7 +82,9 @@ export default function TurnScreen({
     return tannoyLine(tannoyContext(state, landed, forecastIntake(state, state.turn)), state.seed)
   }, [state])
 
-  const interrupting = Boolean(state.pendingIdea) && !execGone
+  // The tour goes first. A senior colleague barging in before the player has
+  // been shown the board is a bad first thirty seconds, and he will keep.
+  const interrupting = Boolean(state.pendingIdea) && !execGone && !showTour
 
   // ------------------------------------------------------------- the phones
   //
@@ -171,6 +179,8 @@ export default function TurnScreen({
         readyNote={readyNote}
         onAdvance={() => onCommit({ choices, eventChoices, ideaChoice })}
       />
+
+      {showTour && !interrupting && <Tour onDone={() => onTourDone?.()} />}
 
       {interrupting && state.pendingIdea && (
         <ExecModal

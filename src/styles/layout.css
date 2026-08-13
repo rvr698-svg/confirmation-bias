@@ -14,6 +14,13 @@
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   background: var(--wash);
+  /* Nothing may push the board wider than the screen it is pinned to. */
+  overflow: hidden;
+  max-width: 100vw;
+}
+
+.play > * {
+  min-width: 0;
 }
 
 /* ---------------------------------------------------------------- topbar */
@@ -37,6 +44,9 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .turn-count {
@@ -136,6 +146,75 @@
   flex: 1 1 100%;
 }
 
+/* ------------------------------------------------------------------ tour */
+
+.tour {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(27, 26, 43, 0.55);
+  animation: scrimin 0.2s ease-out;
+}
+
+/* The ring is a hole in the scrim: a huge shadow paints everything outside it. */
+.tour-ring {
+  position: fixed;
+  border-radius: 16px;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 9999px rgba(27, 26, 43, 0.55);
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+.tour-caption {
+  position: fixed;
+  width: min(360px, calc(100vw - 32px));
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 0 6px 0 var(--ink);
+  padding: 18px 20px;
+}
+
+.tour-count {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--brand);
+  border-radius: 100px;
+  padding: 3px 10px;
+}
+
+.tour-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 10px 0 6px;
+}
+
+.tour-body {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.tour-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tour-skip {
+  border: 0;
+  background: none;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: underline;
+  padding: 6px 2px;
+}
+
 /* ---------------------------------------------------------------- tannoy */
 
 .tannoy {
@@ -229,24 +308,94 @@
   gap: 20px;
 }
 
-.intro-list {
-  display: grid;
-  gap: 10px;
-  margin: 26px 0 32px;
+/* The cold open: the number, on a slide, handed to you. */
+.scene {
+  border-left: 4px solid var(--brand);
+  padding: 4px 0 4px 20px;
+  margin: 26px 0 30px;
+  max-width: 60ch;
 }
 
-.intro-item {
-  display: grid;
-  grid-template-columns: 26px 1fr;
-  gap: 14px;
-  font-size: 15px;
-  align-items: baseline;
+.scene-line {
+  font-size: 19px;
+  line-height: 1.45;
+  margin: 0 0 12px;
 }
 
-.intro-num {
-  color: var(--brand);
-  font-weight: 700;
+.scene-line strong {
+  font-size: 26px;
   font-variant-numeric: tabular-nums;
+  color: var(--brand-dark);
+}
+
+.scene-line.last {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.intro-rules {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 30px;
+  max-width: 66ch;
+}
+
+.intro-rule {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 14px;
+  align-items: start;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.intro-rule strong {
+  color: var(--ink);
+}
+
+.intro-rule-num {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--brand);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: var(--pop-sm);
+}
+
+.measure-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin: 0 0 34px;
+}
+
+.measure-card {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--pop-sm);
+  background: var(--white);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.measure-name {
+  font-weight: 700;
+  font-size: 13.5px;
+}
+
+.measure-line {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.4;
 }
 
 .actions {
@@ -305,5 +454,81 @@
   }
   .work-head {
     gap: 10px;
+  }
+}
+
+/*
+ * Phones.
+ *
+ * The board still does not scroll. Everything shrinks, the pips go (the turn
+ * counter already says where you are), the rail becomes a swipeable strip, and
+ * every control keeps a finger-sized target.
+ */
+@media (max-width: 640px) {
+  .topbar {
+    padding: 8px 12px;
+    gap: 10px;
+    border-bottom-width: 2px;
+  }
+  .wordmark {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+  .topbar .turn-count {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    margin-left: auto;
+    text-align: right;
+  }
+  .pips {
+    display: none;
+  }
+
+  .play-main {
+    padding: 8px 12px 2px;
+    gap: 10px;
+  }
+
+  .month {
+    font-size: 18px;
+  }
+  .strap {
+    font-size: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .tannoy {
+    padding: 6px 12px 6px 10px;
+    gap: 9px;
+  }
+  .tannoy-line {
+    font-size: 12px;
+  }
+
+  .actionbar {
+    padding: 8px 12px;
+    gap: 10px;
+    border-top-width: 2px;
+  }
+  .action-note {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+  .actionbar .btn {
+    padding: 12px 16px;
+    font-size: 12px;
+    flex: 0 0 auto;
+  }
+
+  .tour-caption {
+    left: 12px !important;
+    right: 12px;
+    width: auto;
+    bottom: 12px;
+    top: auto !important;
   }
 }

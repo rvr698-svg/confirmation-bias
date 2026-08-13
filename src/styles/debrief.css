@@ -28,6 +28,183 @@
   padding-left: 18px;
 }
 
+/* ------------------------------------------------ the five, out of five */
+
+.scores {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.scores-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.scores-overall {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.scores-overall strong {
+  font-size: 26px;
+  color: var(--ink);
+}
+
+.score-max {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.score-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 6px 14px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--pop-sm);
+  background: var(--white);
+  padding: 14px 16px;
+}
+
+.score-head {
+  grid-column: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.score-name {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.score-outof {
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.score-outof strong {
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.score-pips {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  gap: 4px;
+}
+
+.score-pip {
+  width: 20px;
+  height: 10px;
+  border-radius: 3px;
+  border: 2px solid var(--ink);
+  background: var(--white);
+}
+
+.score-pip.on.band-strong {
+  background: var(--brand);
+}
+
+.score-pip.on.band-holding {
+  background: var(--brand-wash);
+}
+
+.score-pip.on.band-pressure {
+  background: var(--gold);
+}
+
+.score-pip.on.band-exposed {
+  background: var(--bad);
+}
+
+.score-row .band-tag {
+  grid-column: 2;
+  justify-self: end;
+}
+
+.score-detail {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------ appraisal */
+
+.appraisal {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--pop);
+  background: var(--brand-wash);
+  padding: 20px 24px;
+  margin-top: 22px;
+}
+
+.appraisal-line {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 10px 0 0;
+  font-weight: 600;
+}
+
+.appraisal-line.development {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.appraisal-foot {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------- signpost */
+
+.signpost {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--pop);
+  background: var(--gold-wash);
+  padding: 26px 30px;
+  margin-top: 40px;
+  max-width: 72ch;
+}
+
+.signpost.tier-0 {
+  background: var(--wash);
+}
+
+.signpost-headline {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 8px 0 10px;
+}
+
+.signpost-body {
+  font-size: 15.5px;
+  color: var(--ink);
+  margin: 0 0 18px;
+  max-width: 64ch;
+}
+
+.signpost-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.signpost-foot {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
 .bands {
   display: grid;
   gap: 8px;

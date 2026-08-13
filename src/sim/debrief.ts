@@ -186,7 +186,7 @@ export interface Debrief {
 
 export function buildDebrief(state: GameState): Debrief {
   const position = computePosition(state.queue, Number.POSITIVE_INFINITY)
-  const card = scorecard(position)
+  const card = scorecard(position, state.seed)
   const traced = traceChoices(state)
   return { position, card, traced, headlines: traced.slice(0, 3) }
 }

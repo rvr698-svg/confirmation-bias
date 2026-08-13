@@ -9,12 +9,18 @@
  * Nobody should feel humiliated. Everybody should feel found out.
  */
 
-import { BANDS, MEASURE_TARGET, CAPACITY } from '../config/config'
-import { BREACH_LINES, VERDICTS, VERDICT_FALLBACK, type VerdictContext } from '../config/verdicts'
+import { BANDS, MEASURE_NAMES, MEASURE_TARGET, CAPACITY, STARS } from '../config/config'
+import { appraisalBandFor, type AppraisalContext } from '../config/appraisal'
+import {
+  BREACH_LINES,
+  VERDICTS,
+  VERDICT_FALLBACK,
+  type VerdictContext,
+} from '../config/verdicts'
 import type { Band, BandKey, Position, ScoredMeasure, Scorecard } from './types'
 import { ordinal, standing } from './league'
 import { mostOffNumber, placementCulprit, subjectMix } from './subjects'
-import { clamp } from './rng'
+import { clamp, draw } from './rng'
 
 /** Scoring constants live here rather than in the components. PLACEHOLDER. */
 export const SCORING = {
@@ -154,26 +160,80 @@ export function breachSummary(p: Position): string[] {
   })
 }
 
-export function scorecard(p: Position): Scorecard {
-  const parts: Array<[string, string, { score: number; detail: string }]> = [
-    ['intake', 'Intake against target', scoreIntake(p)],
-    ['league', 'League table position', scoreLeague(p)],
-    ['access', 'Access and participation', scoreAccess(p)],
-    ['budget', 'Budget position', scoreBudget(p)],
-    ['team', 'Team capacity and wellbeing', scoreTeam(p)],
+export function scorecard(p: Position, seed = 0): Scorecard {
+  const parts: Array<[string, { score: number; detail: string }]> = [
+    ['intake', scoreIntake(p)],
+    ['league', scoreLeague(p)],
+    ['access', scoreAccess(p)],
+    ['budget', scoreBudget(p)],
+    ['team', scoreTeam(p)],
   ]
 
-  const measures: ScoredMeasure[] = parts.map(([id, name, r]) => ({
+  const measures: ScoredMeasure[] = parts.map(([id, r]) => ({
     id,
-    name,
+    name: MEASURE_NAMES[id].name,
     band: bandFor(r.score),
     score: r.score,
+    of5: outOfFive(r.score),
     detail: r.detail,
   }))
 
   const overall = measures.reduce((s, m) => s + m.score, 0) / measures.length
 
-  return { measures, overall, verdict: verdictFor(p, measures, overall) }
+  const appraisal = appraisalFor(p, measures, outOfFive(overall), seed)
+
+  return {
+    measures,
+    overall,
+    overallOf5: outOfFive(overall),
+    verdict: verdictFor(p, measures, overall),
+    appraisal,
+  }
+}
+
+/** The 0-100 internal score as the 1-5 the player is shown. */
+export function outOfFive(score: number): number {
+  return (STARS.find((s) => score >= s.min) ?? STARS[STARS.length - 1]).of5
+}
+
+/**
+ * Two appraisal lines, banded by thirds and drawn from a pool inside the band.
+ *
+ * The draw key is the shape of the cycle: every measure's score out of five,
+ * whether the number was made, and whether the regulator got involved. So the
+ * same run always writes the same appraisal, and somebody who played
+ * differently gets different words for the same band.
+ */
+export function appraisalFor(
+  p: Position,
+  measures: ScoredMeasure[],
+  overallOf5: number,
+  seed: number,
+): [string, string] {
+  const ranked = [...measures].sort((a, b) => b.score - a.score)
+  const best = ranked[0]
+  const worst = ranked[ranked.length - 1]
+  const ratio = p.measures.intake / p.measures.target
+
+  const context: AppraisalContext = {
+    intake: Math.round(p.measures.intake).toLocaleString('en-GB'),
+    target: Math.round(p.measures.target).toLocaleString('en-GB'),
+    best: best.name,
+    bestPhrase: MEASURE_NAMES[best.id].inSentence,
+    worst: worst.name,
+    worstPhrase: MEASURE_NAMES[worst.id].inSentence,
+    worstDetail: worst.detail,
+    onNumber: Math.abs(ratio - 1) <= SCORING.intake.tolerance,
+    fined: p.measures.penalties > 0,
+  }
+
+  const band = appraisalBandFor(overallOf5)
+  const shape = `${measures.map((m) => m.of5).join('')}:${context.onNumber}:${context.fined}`
+
+  const pick = <T,>(pool: T[], salt: string): T =>
+    pool[Math.floor(draw(seed, `appraisal:${salt}:${shape}`) * pool.length) % pool.length]
+
+  return [pick(band.achievements, 'did')(context), pick(band.developments, 'todo')(context)]
 }
 
 /**
