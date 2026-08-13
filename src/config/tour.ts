@@ -29,8 +29,8 @@ export interface TourStep {
 export const TOUR: TourStep[] = [
   {
     target: '.rail',
-    title: 'Watch your team',
-    body: 'Down here is everything true right now: your projected intake, the five measures, and two panels folded away. The one that matters is your team. Four named people who get stretched, start looking for other jobs, and leave — and the numbers will not warn you first.',
+    title: 'Where everything stands',
+    body: 'Down the left is the current state of the cycle: your projected intake, the five measures you are scored on, and two panels folded away. Keep an eye on it as the months go by. Start with your team — four named people, and how each of them is getting on.',
     openTarget: '.team-strip',
     prompt: 'Open “The team” to carry on.',
   },
