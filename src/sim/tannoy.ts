@@ -35,6 +35,12 @@ export function tannoyContext(
   }
 }
 
+/** Which situation the tannoy thinks it is in. Exported so tests can check the
+ *  choice rather than the wording, which rotates. */
+export function tannoySituation(c: TannoyContext): string | null {
+  return TANNOY.find((line) => line.when(c))?.id ?? null
+}
+
 export function tannoyLine(c: TannoyContext, seed: number): string {
   const hit = TANNOY.find((line) => line.when(c))
 
@@ -47,5 +53,12 @@ export function tannoyLine(c: TannoyContext, seed: number): string {
     return TANNOY_FILLER[i]
   }
 
-  return hit ? hit.say(c) : TANNOY_FILLER[0]
+  if (!hit) return TANNOY_FILLER[0]
+
+  // Walk the situation's lines by turn, so a problem that lasts five months is
+  // announced five different ways. The seed offsets where in the list a given
+  // cycle starts, so two players with the same problem do not hear it in the
+  // same order.
+  const start = (Math.abs(seed) >>> 0) % hit.say.length
+  return hit.say[(start + c.turn) % hit.say.length](c)
 }

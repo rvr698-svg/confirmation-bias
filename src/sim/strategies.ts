@@ -95,7 +95,7 @@ const PROFILE: Plan = {
   'd9-prep': 'rehearsal',
   'd9-accommodation': 'wait',
   'd10-nearmiss': 'hold',
-  'd10-clearing': 'adjustment',
+  'd10-clearing': 'tight',
   'd10-staffing': 'admissions',
 }
 
@@ -147,7 +147,7 @@ const BUDGET: Plan = {
   'd9-prep': 'light',
   'd9-accommodation': 'cap',
   'd10-nearmiss': 'confirm-all',
-  'd10-clearing': 'adjustment',
+  'd10-clearing': 'tight',
   'd10-staffing': 'admissions',
 }
 
@@ -172,7 +172,7 @@ const ACCESS: Plan = {
   'd2-conditions': 'unconditional',
   'd9-prep': 'rehearsal',
   'd9-accommodation': 'overflow',
-  'd10-nearmiss': 'selective',
+  'd10-nearmiss': 'hold',
   'd10-clearing': 'wide',
   'd10-staffing': 'everyone',
 }

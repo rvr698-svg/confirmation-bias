@@ -5,7 +5,7 @@
 
 import { describe, expect, it } from 'vitest'
 import { APPRAISAL_BANDS, appraisalBandFor } from '../src/config/appraisal'
-import { SIGNPOSTS, signpostFor } from '../src/config/signpost'
+import { SIGNPOSTS, THINK_BOLD_LABEL, THINK_BOLD_URL, signpostFor } from '../src/config/signpost'
 import { computePosition } from '../src/sim/engine'
 import { outOfFive, scorecard } from '../src/sim/scoring'
 import type { Lever, ModifierEntry } from '../src/sim/types'
@@ -78,11 +78,27 @@ describe('the appraisal', () => {
     expect(card.overallOf5).toBeLessThanOrEqual(5)
   })
 
-  it('sends a good cycle to the jobs board and a bad one to the restart button', () => {
-    expect(signpostFor(5).href).toMatch(/jobs\.ac\.uk/)
-    expect(signpostFor(3).href).toMatch(/think-bold/)
-    expect(signpostFor(1).restart).toBe(true)
-    expect(signpostFor(1).href).toBeUndefined()
+  it('introduces Think Bold on every ending, in different words', () => {
+    const leads = new Set<string>()
+    for (const s of SIGNPOSTS) {
+      expect(s.brandLead.length, 'every ending needs a line before the button').toBeGreaterThan(1)
+      leads.add(s.brandLead)
+    }
+    expect(leads.size, 'the lead into Think Bold should not be identical everywhere').toBe(
+      SIGNPOSTS.length,
+    )
+  })
+
+  it('sends nobody to a jobs board', () => {
+    // It was a good joke and a bad call to action.
+    expect(JSON.stringify(SIGNPOSTS)).not.toMatch(/jobs\.ac\.uk/)
+  })
+
+  it('never buries the game under the advert', () => {
+    // Every ending offers the same three actions in the same order, and the
+    // first of them is always going again.
+    expect(THINK_BOLD_LABEL.length).toBeGreaterThan(0)
+    expect(THINK_BOLD_URL).toMatch(/think-bold/)
   })
 
   it('covers every score from one to five, in both banded things', () => {

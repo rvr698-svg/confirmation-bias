@@ -1,0 +1,156 @@
+/*
+ * Social asset for CONFIRMATION BIAS: the debrief share card, at a size that
+ * survives a LinkedIn feed on a phone.
+ *
+ * Colours and type are the game's own — `src/styles/base.css` and
+ * `src/config/palette.ts`. The layout is `.share-card` in
+ * `src/styles/debrief.css`, scaled up. If the colourway changes, change it
+ * there first and copy it here.
+ *
+ * The figures are a real playthrough, not invented for the picture:
+ * seed 31, the "Access first" strategy. See README.md in this folder.
+ *
+ * Every size below is a multiple of --s, so a format only has to say how big
+ * it is. The 4:5 crop is the square at 1.15 and nothing else changes.
+ */
+
+:root {
+  --ink: #1b1a2b;
+  --muted: #6b6885;
+  --faint: #9895ae;
+  --brand: #5647d1;
+  --line: #e4e2ef;
+  --wash: #f7f6fc;
+  --white: #ffffff;
+
+  --s: 1;
+  --pad: 66px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html,
+body {
+  background: var(--wash);
+}
+
+body {
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: var(--pad);
+  overflow: hidden;
+}
+
+/* The two formats LinkedIn renders well. Nothing else changes. */
+body.square {
+  width: 1200px;
+  height: 1200px;
+}
+
+body.portrait {
+  width: 1200px;
+  height: 1500px;
+  --s: 1.15;
+  --pad: 52px;
+}
+
+.card {
+  width: 100%;
+  border: calc(5px * var(--s)) solid var(--ink);
+  border-radius: calc(28px * var(--s));
+  background: var(--white);
+  box-shadow: 0 calc(7px * var(--s)) 0 var(--ink);
+  padding: calc(58px * var(--s)) calc(62px * var(--s));
+}
+
+.title {
+  font-size: calc(54px * var(--s));
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.sub {
+  font-size: calc(24px * var(--s));
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: calc(8px * var(--s));
+}
+
+.rule {
+  height: calc(4px * var(--s));
+  width: calc(108px * var(--s));
+  background: var(--brand);
+  border: 0;
+  margin-top: calc(30px * var(--s));
+}
+
+.rows {
+  margin: calc(36px * var(--s)) 0 calc(40px * var(--s));
+  display: grid;
+  gap: calc(18px * var(--s));
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: calc(26px * var(--s));
+  align-items: center;
+  font-size: calc(30px * var(--s));
+}
+
+/* Brand indigo for filled and empty alike, exactly as the game draws it. */
+.dots {
+  color: var(--brand);
+  font-size: calc(26px * var(--s));
+  letter-spacing: calc(6px * var(--s));
+}
+
+.band {
+  font-size: calc(20px * var(--s));
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: calc(224px * var(--s));
+  text-align: right;
+}
+
+.verdict {
+  border-top: calc(2px * var(--s)) solid var(--line);
+  padding-top: calc(32px * var(--s));
+  font-size: calc(33px * var(--s));
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.foot {
+  margin-top: calc(34px * var(--s));
+  font-size: calc(20px * var(--s));
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/*
+ * Outside the card, because a public post should carry it: the same line the
+ * game shows on the intro and the debrief. `DISCLAIMER_SHORT` in
+ * `src/components/layout/Disclaimer.tsx`.
+ */
+.disclaimer {
+  font-size: calc(19px * var(--s));
+  color: var(--faint);
+  letter-spacing: 0.02em;
+  text-align: center;
+}

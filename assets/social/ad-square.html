@@ -1,0 +1,202 @@
+<!doctype html>
+<!--
+  CONFIRMATION BIAS - advertisement, 1200 x 1200.
+
+  One real turn: seed 31, the "Access first" strategy, stopped at the top of
+  turn 6, February. The projection, the confidence, the count of decisions still
+  in the air, the announcement, the four measures, the capacity reading and
+  Yusuf's leg all came out of the engine at that moment. See README.md.
+
+  Marge is not a redraw either. The SVG is `src/components/Mascot.tsx` at the
+  "worried" mood, transcribed to static markup and cropped to her.
+
+    chrome --headless --screenshot=ad-square.png --window-size=1200,1200
+-->
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Confirmation Bias — advertisement, square</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="ad.css" />
+  </head>
+  <body class="square">
+    <div class="head">
+      <div class="wordmark">Confirmation Bias</div>
+      <div class="turnmark">
+        <span class="eyebrow">Turn 6 of 10 · February</span>
+        <span class="pips">
+          <span class="pip on"></span>
+          <span class="pip on"></span>
+          <span class="pip on"></span>
+          <span class="pip on"></span>
+          <span class="pip on"></span>
+          <span class="pip on"></span>
+          <span class="pip"></span>
+          <span class="pip"></span>
+          <span class="pip"></span>
+          <span class="pip"></span>
+        </span>
+      </div>
+    </div>
+
+    <div class="board">
+      <div class="rail">
+        <div class="panel">
+          <span class="eyebrow">Projected intake</span>
+          <div class="forecast">4,037</div>
+          <div class="against">against a target of 3,800</div>
+          <div class="conf">
+            <span class="conf-bars">
+              <span class="conf-bar on"></span>
+              <span class="conf-bar on"></span>
+              <span class="conf-bar"></span>
+              <span class="conf-bar"></span>
+              <span class="conf-bar"></span>
+            </span>
+            <span>Limited confidence.</span>
+          </div>
+          <div class="pending">
+            8 effects of decisions you have already taken have not landed yet.
+          </div>
+        </div>
+
+        <div class="chips">
+          <div class="chip up">
+            <span class="chip-label">League table</span>
+            <span class="chip-value">61st ▲3</span>
+          </div>
+          <div class="chip mid">
+            <span class="chip-label">Access intake</span>
+            <span class="chip-value">34.9%</span>
+          </div>
+          <div class="chip up">
+            <span class="chip-label">Budget left</span>
+            <span class="chip-value">£408k</span>
+          </div>
+          <div class="chip mid">
+            <span class="chip-label">Team</span>
+            <span class="chip-value">Coping</span>
+          </div>
+        </div>
+
+        <div class="panel wash">
+          <span class="eyebrow">The pipeline as it stands</span>
+          <div class="stage-list">
+            <div class="stage"><span class="stage-name">Applications</span><span class="stage-value">26,763</span></div>
+            <div class="stage"><span class="stage-name">Offers made</span><span class="stage-value">19,134</span></div>
+            <div class="stage"><span class="stage-name">Firm acceptances</span><span class="stage-value">3,707</span></div>
+            <div class="stage"><span class="stage-name">Insurance acceptances</span><span class="stage-value">2,296</span></div>
+            <div class="stage"><span class="stage-name">Conditions met, modelled</span><span class="stage-value">3,523</span></div>
+          </div>
+        </div>
+
+        <!-- The square has no room for this and says it in one line beside
+             Yusuf instead. The 4:5 has the height, so it gets the real panel. -->
+        <div class="panel cap-panel">
+          <div class="cap-head">Capacity is tightening</div>
+          <p class="cap-line">Teaching capacity is close. Deans have started asking.</p>
+          <p class="cap-line">Accommodation is nearly full on the current projection.</p>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="tannoy">
+          <!-- src/components/layout/Tannoy.tsx -->
+          <svg viewBox="0 0 24 20" aria-hidden="true">
+            <path
+              d="M 3 7 h 4 l 7 -5 v 16 l -7 -5 h -4 z"
+              fill="#f0a92b"
+              stroke="#1b1a2b"
+              stroke-width="1.8"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M 17 6 q 3 4 0 8 M 20 3 q 5 7 0 14"
+              fill="none"
+              stroke="#1b1a2b"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+          <p class="tannoy-line">
+            A review of Creative Arts has been commissioned. It will report after the decisions are
+            made.
+          </p>
+        </div>
+
+        <div class="marge-row">
+          <div class="marge">
+            <!-- src/components/Mascot.tsx, mood: worried. Cropped to her, not to
+                 the component's 120-square, which is mostly air above her head. -->
+            <svg viewBox="20 21 78 100" aria-hidden="true">
+              <path d="M 24 120 q 0 -26 36 -26 q 36 0 36 26 z" fill="#5647d1" stroke="#1b1a2b" stroke-width="3" />
+              <path d="M 48 96 L 60 112 L 72 96" fill="none" stroke="#f0a92b" stroke-width="3.4" />
+              <rect x="53" y="108" width="14" height="10" rx="2" fill="#fff" stroke="#1b1a2b" stroke-width="2.2" />
+              <rect x="53" y="80" width="14" height="14" fill="#f6c9a8" stroke="#1b1a2b" stroke-width="2.6" />
+              <circle cx="60" cy="58" r="27" fill="#f6c9a8" stroke="#1b1a2b" stroke-width="3" />
+              <path
+                d="M 33 55 q 2 -30 27 -30 q 25 0 27 30 q -6 -13 -27 -13 q -21 0 -27 13 z"
+                fill="#5b4636"
+                stroke="#1b1a2b"
+                stroke-width="2.6"
+              />
+              <g stroke="#1b1a2b" stroke-width="2.8" stroke-linecap="round">
+                <line x1="42" y1="43.75" x2="54" y2="41.75" />
+                <line x1="66" y1="41.75" x2="78" y2="43.75" />
+              </g>
+              <circle cx="48" cy="52" r="6.4" fill="#fff" stroke="#1b1a2b" stroke-width="1.6" />
+              <circle cx="48" cy="52.6" r="2.9" fill="#1b1a2b" />
+              <circle cx="72" cy="52" r="6.4" fill="#fff" stroke="#1b1a2b" stroke-width="1.6" />
+              <circle cx="72" cy="52.6" r="2.9" fill="#1b1a2b" />
+              <path d="M 50 70 q 5 -5 10 0 q 5 5 10 0" fill="none" stroke="#1b1a2b" stroke-width="2.6" stroke-linecap="round" />
+              <path d="M 88 38 q 4 6 0 9 q -4 -3 0 -9 z" fill="#7ec8ef" stroke="#1b1a2b" stroke-width="1.5" />
+            </svg>
+
+            <div class="cups">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M 3 5 h 8 v 6 a 3 3 0 0 1 -8 0 z" fill="#fff" stroke="#1b1a2b" stroke-width="1.6" />
+                <path d="M 11 6.5 q 3 0 3 2.5 q 0 2.5 -3 2.5" fill="none" stroke="#1b1a2b" stroke-width="1.6" />
+              </svg>
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M 3 5 h 8 v 6 a 3 3 0 0 1 -8 0 z" fill="#fff" stroke="#1b1a2b" stroke-width="1.6" />
+                <path d="M 11 6.5 q 3 0 3 2.5 q 0 2.5 -3 2.5" fill="none" stroke="#1b1a2b" stroke-width="1.6" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="bubble">
+            <div class="bubble-line">
+              I am not panicking. I have simply made a list, and the list is upsetting.
+            </div>
+            <div class="bubble-who">Marge · Deputy Head of Admissions, fourteenth cycle</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="who">
+            <strong>Yusuf</strong> <span>· Admissions Officer</span><br />
+            <span>Signed off with a broken leg. The cat is unrepentant.</span>
+          </p>
+          <p class="who cap">
+            <strong>Capacity is tightening.</strong>
+            <span>Accommodation is nearly full on the current projection.</span>
+          </p>
+        </div>
+
+        <div class="cta">
+          <span class="btn">Take the meeting</span>
+          <span class="cta-note">
+            Ten turns, eight to twelve minutes.<br />Nothing is saved, so nobody will ever know.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <p class="disclaimer">For fun. Not a commentary on the sector. Every number is invented.</p>
+  </body>
+</html>

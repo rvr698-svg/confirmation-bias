@@ -44,6 +44,8 @@ import type {
   Position,
 } from './types'
 import { clearingCalls } from './clearing'
+import { cakeMoment } from './team'
+import { cakeDecision, CAKE_DECISION_ID } from '../config/cake'
 import { clamp, draw, drawNormal } from './rng'
 
 export type { Levels, Position }
@@ -409,6 +411,7 @@ export function createInitialState(seed: number): GameState {
     activeEvents: [],
     pendingIdea: null,
     usedIdeaIds: [],
+    usedCake: false,
     choicesThisTurn: {},
     breaches: [],
   }
@@ -426,8 +429,20 @@ export function phaseForTurn(turn: number): 'confirmation' | 'clearing' | null {
  */
 export function turnDecisions(state: GameState): Decision[] {
   const authored = decisionsForTurn(state.turn, state.turnPhase)
-  if (state.turnPhase !== 'clearing') return authored
-  return [...authored, ...clearingCalls(state.seed)]
+
+  if (state.turnPhase === 'clearing') return [...authored, ...clearingCalls(state.seed)]
+
+  // The cake appears on the turn the roster frays, and only once.
+  const cake = cakeMoment(
+    computePosition(state.queue, state.turn).measures.team,
+    state.queue,
+    state.turn,
+  )
+  if (cake && !state.usedCake) {
+    return [...authored, cakeDecision(state.turn, cake.looking, cake.stretched)]
+  }
+
+  return authored
 }
 
 export function decisionById(id: string): Decision | undefined {
@@ -548,6 +563,7 @@ export function commitTurn(
   }
 
   const queue = [...state.queue, ...entries]
+  const cakeTaken = state.usedCake || Boolean(decisionChoices[CAKE_DECISION_ID])
 
   // Both figures are taken from the queue as it stood while the player was
   // looking at the screen, not after this turn's choices were added. The
@@ -564,6 +580,7 @@ export function commitTurn(
   const next: GameState = {
     ...state,
     queue,
+    usedCake: cakeTaken,
     history: [...state.history, record],
     activeEvents: [],
     pendingEvents: [],

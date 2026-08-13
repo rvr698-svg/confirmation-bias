@@ -814,16 +814,6 @@ export const DECISIONS: Decision[] = [
         ],
       },
       {
-        id: 'selective',
-        label: 'Confirm near misses in undersubscribed subjects only',
-        blurb: 'Course by course, against the position on the screen.',
-        effects: [
-          { lever: 'conditionsMet', op: 'add', value: 0.035, delay: 0, note: 'selective near miss confirmation topped up the weak subjects' },
-          { lever: 'entryProfile', op: 'add', value: -1.2, delay: 0, note: 'selective confirmation cost some profile' },
-          { lever: 'team', op: 'add', value: -3, delay: 0, note: 'deciding course by course took the morning' },
-        ],
-      },
-      {
         id: 'hold',
         label: 'Hold the line',
         blurb: 'Conditions were conditions. Consistency has a price and today you pay it.',
@@ -886,13 +876,13 @@ export const DECISIONS: Decision[] = [
         ],
       },
       {
-        id: 'adjustment',
-        label: 'Clearing plus adjustment, tight',
-        blurb: 'Small Clearing. Actively recruit students who exceeded their conditions elsewhere.',
+        id: 'tight',
+        label: 'A tight Clearing, on profile only',
+        blurb: 'Very few vacancies, advertised at your standard offer and no lower.',
         effects: [
-          { lever: 'spend', op: 'add', value: 55, delay: 0, note: 'you ran a tight Clearing with adjustment' },
+          { lever: 'spend', op: 'add', value: 55, delay: 0, note: 'you ran a tight Clearing' },
           { lever: 'clearingShare', op: 'add', value: -0.015, delay: 0, note: 'a tight Clearing brought in very few late students' },
-          { lever: 'entryProfile', op: 'add', value: 1.6, delay: 0, note: 'adjustment recruits lifted the entry profile' },
+          { lever: 'entryProfile', op: 'add', value: 1.6, delay: 0, note: 'holding the standard offer through Clearing lifted the entry profile' },
           { lever: 'team', op: 'add', value: -6, delay: 0, note: 'Clearing cost the team even when tight' },
         ],
       },

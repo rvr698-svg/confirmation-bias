@@ -18,7 +18,7 @@ const MEASURES: { name: string; line: string }[] = [
   { name: 'League table position', line: 'Everybody reads it. Nobody agrees with it.' },
   { name: 'Access and participation', line: 'You signed up to this in a document with your name on it.' },
   { name: 'Budget position', line: 'Finance have a long memory and a longer spreadsheet.' },
-  { name: 'Team capacity', line: 'Four people. They are not a number, though they are scored like one.' },
+  { name: 'Team capacity', line: 'Four people. Varying levels of skill and commitment to their jobs.' },
 ]
 
 export default function IntroScreen({ onStart }: { onStart: () => void }) {
@@ -38,7 +38,7 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
 
         <div className="scene">
           <p className="scene-line">
-            It is the first week of September. The slide says <strong>{fmt(BASELINE.target)}</strong>.
+            The slide says the target is <strong>{fmt(BASELINE.target)}</strong> for next September.
           </p>
           <p className="scene-line">
             Nobody in the room asked whether {fmt(BASELINE.target)} was possible, because the person
@@ -88,7 +88,7 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
 
         <div className="actions">
           <button type="button" className="btn" onClick={onStart}>
-            Take the meeting
+            Okay, let’s do this
           </button>
           <span className="action-note">
             Ten turns, eight to twelve minutes. Nothing is saved, so nobody will ever know.

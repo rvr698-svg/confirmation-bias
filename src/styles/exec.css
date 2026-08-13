@@ -202,25 +202,29 @@
   }
 }
 
+/* The figure shrinks on a small screen. It never disappears: somebody
+   standing at your desk is the whole point of the mechanic. */
 @media (max-width: 700px) {
   .exec {
-    grid-template-columns: minmax(0, 1fr);
-    align-items: start;
-    padding: 18px 20px 20px;
+    grid-template-columns: 74px minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px 18px 18px;
   }
-  .exec-figure {
-    display: none;
+  .exec-figure svg {
+    width: 72px;
+    height: 85px;
   }
   .exec-idea {
-    font-size: 18px;
+    font-size: 17px;
+  }
+  .exec-copy {
+    font-size: 13.5px;
   }
 }
 
 @media (max-height: 720px) {
-  .exec-figure {
-    display: none;
-  }
-  .exec {
-    grid-template-columns: minmax(0, 1fr);
+  .exec-figure svg {
+    width: 82px;
+    height: 97px;
   }
 }

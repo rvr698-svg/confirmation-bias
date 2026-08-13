@@ -7,12 +7,9 @@
  */
 
 import { computePosition, forecastIntake } from '../../sim/engine'
-import { capacityReading } from '../../sim/capacity'
 import { standing } from '../../sim/league'
 import { subjectMix } from '../../sim/subjects'
-import { pendingItems } from '../../sim/pending'
 import { roster } from '../../sim/team'
-import PendingTray from './PendingTray'
 import TeamStrip from './TeamStrip'
 import { useTallViewport } from '../../hooks/useTallViewport'
 import type { GameState } from '../../sim/types'
@@ -21,7 +18,6 @@ import ProjectionPanel from './ProjectionPanel'
 import PipelinePanel from './PipelinePanel'
 import MeasureChips from './MeasureChips'
 import SubjectStrip from './SubjectStrip'
-import CapacityStrip from './CapacityStrip'
 
 export default function StatusRail({ state }: { state: GameState }) {
   const roomy = useTallViewport()
@@ -53,11 +49,8 @@ export default function StatusRail({ state }: { state: GameState }) {
 
       <TeamStrip entries={roster(landed.measures.team, state.queue, state.turn)} />
 
-      <PendingTray items={pendingItems(state.queue, state.turn)} />
-
       <SubjectStrip rows={subjectMix(landed)} />
 
-      <CapacityStrip reading={capacityReading(projected, landed.levels)} />
     </aside>
   )
 }

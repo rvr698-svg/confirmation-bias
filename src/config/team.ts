@@ -57,6 +57,27 @@ export const ABSENCES: Absence[] = [
   },
 ]
 
+/**
+ * The cake.
+ *
+ * When the team is fraying and somebody has started looking, you get one
+ * chance to do the small human thing. It is not a lever anywhere else in the
+ * game: everything else you can do to the team is a workload decision. This is
+ * a Friday afternoon and forty pounds.
+ *
+ * It fires once per cycle, and only when the state actually warrants it.
+ */
+export const CAKE = {
+  /** Nobody left, but somebody is looking, and most of them are stretched. */
+  minStretched: 2,
+  /** What it costs, £k. */
+  spend: 0.4,
+  /** What it buys, on the team measure. */
+  team: 9,
+  /** And the promise it extracts. */
+  seesOutClearing: true,
+} as const
+
 export const TEAM: TeamMember[] = [
   {
     id: 'gemma',

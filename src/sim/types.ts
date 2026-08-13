@@ -211,6 +211,8 @@ export interface GameState {
    */
   pendingIdea: import('../config/interruptions').BrightIdea | null
   usedIdeaIds: string[]
+  /** The cake happens once a cycle, if it happens at all. */
+  usedCake?: boolean
   /** Events fired this turn and still awaiting a response. */
   pendingEvents: GameEvent[]
   /** Events fired this turn, for display. */

@@ -28,3 +28,15 @@ export const PALETTE = {
   off: '#e6e4ee',
   sweat: '#7ec8ef',
 } as const
+
+/**
+ * Think Bold's own four colours, used as a small accent on their call to
+ * action at the end of the debrief. Not the logo: an adjacency. If the real
+ * mark is dropped into `public/`, swap it in at `components/Signpost.tsx`.
+ */
+export const THINK_BOLD = {
+  red: '#e8402a',
+  teal: '#3fb49f',
+  yellow: '#f5c518',
+  pink: '#e6187c',
+} as const

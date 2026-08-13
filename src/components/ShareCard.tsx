@@ -14,6 +14,23 @@ import type { Position, Scorecard } from '../sim/types'
 
 const fmt = (n: number) => Math.round(n).toLocaleString('en-GB')
 
+/** Plain text has no soft wrap you can rely on, so the verdict wraps itself. */
+function wrap(sentence: string, width = 68): string {
+  const out: string[] = []
+  let line = ''
+
+  for (const word of sentence.split(' ')) {
+    if (line && `${line} ${word}`.length > width) {
+      out.push(line)
+      line = word
+    } else {
+      line = line ? `${line} ${word}` : word
+    }
+  }
+  if (line) out.push(line)
+  return out.join('\n')
+}
+
 export function shareText(card: Scorecard, position: Position): string {
   const width = Math.max(...card.measures.map((m) => m.name.length))
   const rows = card.measures
@@ -30,8 +47,26 @@ export function shareText(card: Scorecard, position: Position): string {
     '',
     `Finished on ${intake} against a target of ${target}.`,
     '',
-    card.verdict,
+    wrap(card.verdict),
   ].join('\n')
+}
+
+/**
+ * The invitation, added on the way to the clipboard and never shown on screen.
+ * Somebody pasting their score into a group chat should be pasting a way in
+ * with it, without the box on the page looking like an advert.
+ */
+export function shareInvitation(): string {
+  const here = typeof window === 'undefined' ? '' : window.location.origin
+  return here ? `Fancy a go at it yourself? ${here}` : ''
+}
+
+/** What actually lands in the clipboard: the result, then the invitation. */
+export function shareForClipboard(card: Scorecard, position: Position): string {
+  const invite = shareInvitation()
+  return invite ? `${shareText(card, position)}
+
+${invite}` : shareText(card, position)
 }
 
 export default function ShareCard({
@@ -46,7 +81,7 @@ export default function ShareCard({
 
   async function copy() {
     try {
-      await navigator.clipboard.writeText(text)
+      await navigator.clipboard.writeText(shareForClipboard(card, position))
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2200)
     } catch {
@@ -55,34 +90,14 @@ export default function ShareCard({
     }
   }
 
+  // One box, not two. The pasteable block is the one people actually use, and a
+  // pretty card beside it that nobody can copy is just furniture.
   return (
-    <div className="share-wrap">
-      <div className="share-card">
-        <div className="share-title">Confirmation Bias</div>
-        <div className="share-sub">One admissions cycle. Ten turns. September to Clearing.</div>
-
-        <div className="share-rows">
-          {card.measures.map((m) => (
-            <div className="share-row" key={m.id}>
-              <span>{m.name}</span>
-              <span className="share-dots">{BAND_MARK[m.band.key]}</span>
-              <span className="share-band">{m.band.label}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="share-verdict">{card.verdict}</div>
-        <div className="share-foot">
-          Finished on {fmt(position.pipeline.enrolled)} against {fmt(position.measures.target)}
-        </div>
-      </div>
-
-      <div>
-        <div className="copy-block">{text}</div>
-        <button type="button" className="btn ghost" style={{ marginTop: 12 }} onClick={copy}>
-          {copied ? 'Copied' : 'Copy for posting'}
-        </button>
-      </div>
+    <div className="share-block">
+      <div className="copy-block">{text}</div>
+      <button type="button" className="btn ghost" style={{ marginTop: 12 }} onClick={copy}>
+        {copied ? 'Copied' : 'Copy for posting'}
+      </button>
     </div>
   )
 }

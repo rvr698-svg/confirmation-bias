@@ -9,7 +9,7 @@
  * sick in the story is off sick on the screen, for exactly as long.
  */
 
-import { ABSENCES, TEAM, type TeamMember } from '../config/team'
+import { ABSENCES, CAKE, TEAM, type TeamMember } from '../config/team'
 import type { ModifierEntry } from './types'
 
 export type TeamState = 'fine' | 'stretched' | 'looking' | 'gone' | 'off'
@@ -59,4 +59,28 @@ export function roster(team: number, queue: ModifierEntry[] = [], turn = 0): Ros
 
 export function stillHere(team: number, queue: ModifierEntry[] = [], turn = 0): number {
   return roster(team, queue, turn).filter((r) => r.state !== 'gone' && r.state !== 'off').length
+}
+
+/**
+ * Is this the Friday where somebody should buy the team cake?
+ *
+ * Only when the roster says so: at least one person actively looking, the rest
+ * of them stretched, and nobody gone yet, because after somebody has left it
+ * is not a cake problem any more. Once per cycle.
+ */
+export function cakeMoment(
+  team: number,
+  queue: ModifierEntry[],
+  turn: number,
+): { looking: string; stretched: number } | null {
+  const seen = roster(team, queue, turn)
+  if (seen.some((r) => r.state === 'gone')) return null
+
+  const looking = seen.find((r) => r.state === 'looking')
+  if (!looking) return null
+
+  const stretched = seen.filter((r) => r.state === 'stretched' || r.state === 'looking').length
+  if (stretched < CAKE.minStretched) return null
+
+  return { looking: looking.member.name, stretched: stretched - 1 }
 }

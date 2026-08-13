@@ -199,6 +199,115 @@
   text-decoration: none;
 }
 
+/* Leaving and going again are the same size of decision. */
+.signpost-choice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* The Think Bold line sits under the two game actions, introduced rather than
+   competing with them. */
+.signpost-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+}
+
+.signpost-aside {
+  margin: 14px 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.signpost-aside a {
+  color: var(--brand-dark);
+}
+
+.signpost-or {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  max-width: 34ch;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------- the Think Bold call to action */
+
+.btn.tb {
+  position: relative;
+  overflow: hidden;
+  padding-left: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* White ground, because the script half of the mark is black. */
+.btn.tb {
+  background: var(--white);
+  color: var(--ink);
+  padding: 10px 20px;
+}
+
+.btn.tb:hover {
+  background: var(--brand-wash);
+  color: var(--ink);
+}
+
+.tb-logo {
+  height: 20px;
+  width: auto;
+  display: block;
+  flex: 0 0 auto;
+}
+
+/* --------------------------------------------------- the folded traces */
+
+.traces {
+  margin-top: 40px;
+}
+
+.traces-summary {
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 14px 18px;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--pop-sm);
+  background: var(--white);
+  list-style: none;
+}
+
+.traces-summary::-webkit-details-marker {
+  display: none;
+}
+
+.traces-summary::after {
+  content: ' \25BE';
+  color: var(--brand);
+}
+
+.traces[open] .traces-summary {
+  margin-bottom: 18px;
+}
+
+.traces[open] .traces-summary::after {
+  content: ' \25B4';
+}
+
+.share-block {
+  max-width: 640px;
+}
+
 .signpost-foot {
   margin: 14px 0 0;
   font-size: 12.5px;

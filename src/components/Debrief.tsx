@@ -8,14 +8,13 @@
 
 import { buildDebrief } from '../sim/debrief'
 import { breachSummary } from '../sim/scoring'
-import { turnLabel } from '../sim/engine'
-import { STARS_MAX, TOTAL_TURNS } from '../config/config'
+import { STARS_MAX } from '../config/config'
 import type { GameState } from '../sim/types'
 import { subjectMix } from '../sim/subjects'
 import SubjectTable from './SubjectTable'
 import ScoreRow from './ScoreRow'
 import Signpost from './Signpost'
-import ShareCard from './ShareCard'
+import ShareCard, { shareForClipboard } from './ShareCard'
 import Disclaimer from './layout/Disclaimer'
 import MascotBar, { moodAtEnd } from './MascotBar'
 
@@ -31,31 +30,6 @@ export default function Debrief({
   const { position, card, headlines } = buildDebrief(state)
   const breaches = breachSummary(position)
   const diff = position.pipeline.enrolled - position.measures.target
-
-  // One row per turn. The comparison is against what was true at the time,
-  // not against the final number, because decisions taken later genuinely
-  // changed the outcome and that is not forecast error.
-  const forecastRows = state.history
-    .filter((h, i) => state.history.findIndex((x) => x.turn === h.turn) === i)
-    .map((h) => ({
-      turn: h.turn,
-      label: turnLabel(h.turn),
-      shown: h.shownForecast,
-      truth: h.trueProjection,
-      error: h.shownForecast / h.trueProjection - 1,
-    }))
-
-  const meanError =
-    forecastRows.reduce((s, r) => s + r.error, 0) / Math.max(1, forecastRows.length)
-  const optimistic = forecastRows.filter((r) => r.error > 0).length
-  const biasLine =
-    meanError > 0.015
-      ? 'Your projection ran hot all cycle. Every month it told you that you were doing better than you were.'
-      : meanError < -0.015
-        ? 'Your projection ran cold all cycle. Every month it told you that you were further behind than you were.'
-        : optimistic > forecastRows.length * 0.7 || optimistic < forecastRows.length * 0.3
-          ? 'Your projection leaned the same way most months, which is the kind of error that is hardest to spot from the inside.'
-          : 'Your projection was unbiased and still wrong every month, which is the normal state of affairs.'
 
   return (
     <div className="shell">
@@ -133,8 +107,26 @@ export default function Debrief({
 
       <div className="section">
         <div className="section-head">
-          <h2 className="h2">Three decisions that decided it</h2>
+          <h2 className="h2">Share it</h2>
         </div>
+        <ShareCard card={card} position={position} />
+      </div>
+
+      <Signpost
+        overallOf5={card.overallOf5}
+        onRestart={onRestart}
+        onShare={async () => {
+          try {
+            await navigator.clipboard.writeText(shareForClipboard(card, position))
+            return true
+          } catch {
+            return false
+          }
+        }}
+      />
+
+      <details className="section traces">
+        <summary className="traces-summary">Want to know which decisions decided it?</summary>
         <p className="lede" style={{ marginBottom: 18 }}>
           Chosen by rerunning the whole cycle without each one. These are the three that changed the
           most.
@@ -156,67 +148,7 @@ export default function Debrief({
             <div className="trace-cf">{h.counterfactual}</div>
           </div>
         ))}
-      </div>
-
-      <div className="section">
-        <div className="section-head">
-          <h2 className="h2">What your forecast told you</h2>
-        </div>
-        <p className="lede" style={{ marginBottom: 18 }}>
-          You finished on {fmt(position.pipeline.enrolled)}. This is what the projection showed you
-          each turn, against what you were actually on course for at that moment.
-        </p>
-        <table className="forecast-table">
-          <thead>
-            <tr>
-              <th>Turn</th>
-              <th>What you were shown</th>
-              <th>What was true</th>
-              <th>Error</th>
-            </tr>
-          </thead>
-          <tbody>
-            {forecastRows.map((r) => {
-              const err = r.shown - r.truth
-              const pctErr = r.error * 100
-              return (
-                <tr key={r.turn}>
-                  <td>{r.label}</td>
-                  <td>{fmt(r.shown)}</td>
-                  <td>{fmt(r.truth)}</td>
-                  <td className={Math.abs(pctErr) < 1 ? '' : pctErr > 0 ? 'err-pos' : 'err-neg'}>
-                    {Math.abs(pctErr) < 0.05
-                      ? 'exact'
-                      : `${err > 0 ? '+' : ''}${fmt(err)}  (${pctErr > 0 ? '+' : ''}${pctErr.toFixed(1)}%)`}
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-        <p className="muted" style={{ fontSize: 13.5, marginTop: 14 }}>
-          {biasLine} It only stopped being wrong on results day, by which point the only lever left
-          was Clearing.
-        </p>
-      </div>
-
-      <div className="section">
-        <div className="section-head">
-          <h2 className="h2">Share it</h2>
-        </div>
-        <ShareCard card={card} position={position} />
-      </div>
-
-      <div className="actions">
-        <button type="button" className="btn" onClick={onRestart}>
-          Run another cycle
-        </button>
-        <span className="action-note">
-          A new cycle draws different events. {TOTAL_TURNS} turns, eight to twelve minutes.
-        </span>
-      </div>
-
-      <Signpost overallOf5={card.overallOf5} onRestart={onRestart} />
+      </details>
 
       <Disclaimer compact />
     </div>
