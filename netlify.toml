@@ -1,0 +1,15 @@
+# Netlify build. Connect the repo at app.netlify.com and it will read this.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Single page, no router, but this keeps any stray path on the app rather than
+# on a Netlify 404.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

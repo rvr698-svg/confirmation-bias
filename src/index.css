@@ -1,0 +1,14 @@
+/*
+ * CYCLE - stylesheet index.
+ *
+ * One file per part of the screen. Nothing but imports lives here, so any
+ * given rule has exactly one place it could be.
+ */
+
+@import './styles/base.css';
+@import './styles/layout.css';
+@import './styles/mascot.css';
+@import './styles/rail.css';
+@import './styles/deck.css';
+@import './styles/exec.css';
+@import './styles/debrief.css';

@@ -1,0 +1,309 @@
+/*
+ * The board.
+ *
+ * A turn is pinned to the viewport: bar, rail, card, action. Nothing in here
+ * scrolls the document, because a decision that is below the fold is a decision
+ * the player does not know they have.
+ *
+ * The intro and the debrief are documents and scroll normally.
+ */
+
+.play {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: var(--wash);
+}
+
+/* ---------------------------------------------------------------- topbar */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 26px;
+  border-bottom: 3px solid var(--ink);
+  background: var(--brand);
+  color: var(--white);
+}
+
+.topbar .turn-count {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.wordmark {
+  font-size: 15px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.turn-count {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Always on screen, quietly. */
+.topbar-note {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.82);
+  border-left: 1px solid rgba(255, 255, 255, 0.32);
+  padding-left: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .topbar-note {
+    display: none;
+  }
+}
+
+.pips {
+  display: flex;
+  gap: 5px;
+  margin-left: auto;
+  align-items: center;
+}
+
+.pip {
+  width: 22px;
+  height: 8px;
+  border-radius: 3px;
+  border: 1.5px solid var(--ink);
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.pip.done {
+  background: var(--gold);
+}
+
+.pip.now {
+  background: var(--white);
+  animation: pipbounce 1.1s ease-in-out infinite;
+}
+
+@keyframes pipbounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* ------------------------------------------------------------------ main */
+
+.play-main {
+  min-height: 0;
+  width: 100%;
+  max-width: var(--board);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 336px minmax(0, 1fr);
+  gap: 24px;
+  padding: 16px 26px 4px;
+}
+
+.work {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 10px;
+}
+
+.work-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.month {
+  font-size: 27px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.strap {
+  color: var(--muted);
+  margin: 0;
+  font-size: 14px;
+  flex: 1 1 100%;
+}
+
+/* ---------------------------------------------------------------- tannoy */
+
+.tannoy {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 100px;
+  background: var(--gold-wash);
+  box-shadow: var(--pop-sm);
+  padding: 7px 18px 7px 14px;
+  animation: tannoyin 0.4s ease-out;
+}
+
+.tannoy-horn {
+  line-height: 0;
+  flex: 0 0 auto;
+  animation: tannoyshout 3.2s ease-in-out infinite;
+  transform-origin: 20% 50%;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.tannoy-horn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.tannoy-line {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+@keyframes tannoyin {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tannoyshout {
+  0%,
+  88%,
+  100% {
+    transform: rotate(0deg);
+  }
+  92% {
+    transform: rotate(-9deg);
+  }
+  96% {
+    transform: rotate(9deg);
+  }
+}
+
+/* ------------------------------------------------------------- actionbar */
+
+.actionbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 26px;
+  border-top: 3px solid var(--ink);
+  background: var(--white);
+}
+
+/* ----------------------------------------------------------------- intro */
+
+.shell {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 28px 96px;
+}
+
+.intro {
+  padding: 56px 0 0;
+  max-width: 760px;
+}
+
+.intro-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.intro-list {
+  display: grid;
+  gap: 10px;
+  margin: 26px 0 32px;
+}
+
+.intro-item {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 14px;
+  font-size: 15px;
+  align-items: baseline;
+}
+
+.intro-num {
+  color: var(--brand);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.actions {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.section {
+  margin: 38px 0 0;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.section-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ------------------------------------------------------------ tight fits */
+
+/* Laptop-height windows. Everything gives up a few pixels rather than the
+   layout giving up and scrolling. */
+@media (max-height: 820px) {
+  .play-main {
+    padding: 10px 20px 2px;
+    gap: 18px;
+  }
+  .month {
+    font-size: 22px;
+  }
+  .strap {
+    font-size: 13px;
+  }
+  .topbar,
+  .actionbar {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+}
+
+/* Narrow windows: the rail lies down and becomes a strip you swipe. */
+@media (max-width: 1040px) {
+  .play-main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .work-head {
+    gap: 10px;
+  }
+}

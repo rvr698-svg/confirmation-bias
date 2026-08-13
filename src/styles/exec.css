@@ -1,0 +1,226 @@
+/*
+ * The interruption.
+ *
+ * It covers the board because that is the mechanic. There is no close button,
+ * the scrim does not dismiss it, and Escape only makes him start again.
+ */
+
+.exec-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(22, 33, 31, 0.55);
+  backdrop-filter: blur(3px);
+  animation: scrimin 0.22s ease-out;
+}
+
+@keyframes scrimin {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.exec {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  max-height: 100%;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 20px;
+  align-items: end;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--gold-wash);
+  padding: 22px 26px 24px;
+  box-shadow: 0 8px 0 var(--ink);
+  transform: rotate(-0.5deg);
+  animation: barge 0.5s cubic-bezier(0.18, 1.4, 0.4, 1);
+}
+
+@keyframes barge {
+  0% {
+    transform: translateX(-160px) rotate(-7deg);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(10px) rotate(1.5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) rotate(-0.5deg);
+  }
+}
+
+/* You tried to get past him. */
+.exec.refusing {
+  animation: refuse 0.45s ease-in-out;
+}
+
+@keyframes refuse {
+  0%,
+  100% {
+    transform: translateX(0) rotate(-0.5deg);
+  }
+  20% {
+    transform: translateX(-11px) rotate(-2.4deg);
+  }
+  50% {
+    transform: translateX(11px) rotate(2.4deg);
+  }
+  80% {
+    transform: translateX(-6px) rotate(-1.4deg);
+  }
+}
+
+/* Answered. He is pleased, and he is leaving. */
+.exec.settled {
+  background: var(--wash);
+  animation: settle 0.9s ease forwards;
+}
+
+@keyframes settle {
+  0% {
+    transform: rotate(-0.5deg);
+  }
+  35% {
+    transform: rotate(0deg) scale(0.99);
+  }
+  100% {
+    transform: translateX(120px) rotate(4deg);
+    opacity: 0;
+  }
+}
+
+.exec-figure {
+  align-self: end;
+  line-height: 0;
+}
+
+.exec-idle {
+  animation: leanin 2.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+@keyframes leanin {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+.bulb {
+  animation: flicker 1.6s ease-in-out infinite;
+  transform-origin: 55px 20px;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.08);
+  }
+}
+
+.exec-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: var(--ink);
+  color: var(--white);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+}
+
+.exec.settled .exec-tag {
+  background: var(--brand-dark);
+}
+
+.exec-who {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.exec-role {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+.exec-idea {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 6px 0;
+}
+
+.exec-copy {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.exec-nag {
+  min-height: 19px;
+  margin: 10px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bad);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.exec-nag.on {
+  opacity: 1;
+  animation: nagin 0.3s ease-out;
+}
+
+@keyframes nagin {
+  0% {
+    transform: translateY(4px);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .exec {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    padding: 18px 20px 20px;
+  }
+  .exec-figure {
+    display: none;
+  }
+  .exec-idea {
+    font-size: 18px;
+  }
+}
+
+@media (max-height: 720px) {
+  .exec-figure {
+    display: none;
+  }
+  .exec {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
