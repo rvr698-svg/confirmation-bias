@@ -53,6 +53,38 @@ function pips(done: number, x: number, y: number, w: number, gap: number): strin
 }
 
 const TITLE = 'CONFIRMATION BIAS'
+
+/** Marge's line on the poster. One of her real ones, from `config/mascot.ts`. */
+const QUOTE = 'Somebody is going to ask me about this in a meeting, and it will be a big meeting.'
+
+/** Breaks the quote into lines that fit the bubble, so the copy can change. */
+function quoteLines(text: string, perLine: number): string[] {
+  const out: string[] = []
+  let line = ''
+  for (const word of text.split(' ')) {
+    if (line && `${line} ${word}`.length > perLine) {
+      out.push(line)
+      line = word
+    } else {
+      line = line ? `${line} ${word}` : word
+    }
+  }
+  if (line) out.push(line)
+  return out
+}
+
+/** The quote set inside the bubble, with the attribution under it. */
+function quote(x: number, y: number, perLine: number, size: number): string {
+  const lines = quoteLines(QUOTE, perLine)
+  const body = lines
+    .map(
+      (line, i) =>
+        `<text x="${x}" y="${y + i * (size * 1.35)}" font-family="${FONT}" font-size="${size}" font-weight="700" fill="${PALETTE.ink}">${line}</text>`,
+    )
+    .join('')
+  const attribution = `<text x="${x}" y="${y + lines.length * (size * 1.35) + 14}" font-family="${FONT}" font-size="${size * 0.53}" letter-spacing="3" fill="${PALETTE.brandDark}" font-weight="700">MARGE, DEPUTY HEAD OF ADMISSIONS</text>`
+  return body + attribution
+}
 const FONT = "Segoe UI, Segoe UI Semibold, Arial, sans-serif"
 
 interface Poster {
@@ -64,8 +96,9 @@ interface Poster {
 
 /** Which Marge fronts the advert. Clearing week suggests the frazzled one. */
 const SQUARE_MOODS: { mood: Mood; cups: number; name: string }[] = [
-  { mood: 'frazzled', cups: 3, name: 'poster-square' },
-  { mood: 'worried', cups: 2, name: 'poster-square-calm' },
+  { mood: 'worried', cups: 2, name: 'poster-square' },
+  { mood: 'frazzled', cups: 3, name: 'poster-square-frazzled' },
+  { mood: 'keen', cups: 1, name: 'poster-square-keen' },
 ]
 
 const bubble = (x: number, y: number, w: number, h: number) => `
@@ -89,20 +122,16 @@ const square = (mood: Mood, cupCount: number, name: string): Poster => ({
   <text x="90" y="228" font-family="${FONT}" font-size="80" letter-spacing="5"
     fill="#fff" font-weight="700">${TITLE}</text>
 
-  ${bubble(500, 322, 620, 300)}
-  <text x="550" y="410" font-family="${FONT}" font-size="43" font-weight="700" fill="${PALETTE.ink}">Somebody needs to tell</text>
-  <text x="550" y="468" font-family="${FONT}" font-size="43" font-weight="700" fill="${PALETTE.ink}">the Deans and it is not</text>
-  <text x="550" y="526" font-family="${FONT}" font-size="43" font-weight="700" fill="${PALETTE.ink}">going to be me.</text>
-  <text x="550" y="584" font-family="${FONT}" font-size="23" letter-spacing="3"
-    fill="${PALETTE.brandDark}" font-weight="700">MARGE, DEPUTY HEAD OF ADMISSIONS</text>
+  ${bubble(500, 300, 630, 372)}
+  ${quote(550, 378, 24, 40)}
 
   <g transform="translate(45 300)">${marge(mood, 480)}</g>
   ${cups(cupCount, 118, 800, 1.6)}
 
   <rect x="90" y="880" width="1020" height="4" fill="rgba(255,255,255,0.25)"/>
 
-  <text x="90" y="962" font-family="${FONT}" font-size="40" fill="#fff" font-weight="600">Every decision lands three months late.</text>
-  <text x="90" y="1018" font-family="${FONT}" font-size="40" fill="rgba(255,255,255,0.88)">The forecast lies to you until August.</text>
+  <text x="90" y="962" font-family="${FONT}" font-size="40" fill="#fff" font-weight="600">How hard can it be?</text>
+  <text x="90" y="1018" font-family="${FONT}" font-size="40" fill="rgba(255,255,255,0.88)">Ten minutes to find out.</text>
 
   ${pips(6, 90, 1074, 74, 14)}
 
@@ -129,8 +158,8 @@ const POSTERS: Poster[] = [
   <text x="415" y="212" font-family="${FONT}" font-size="66" letter-spacing="4"
     fill="#fff" font-weight="700">${TITLE}</text>
 
-  <text x="415" y="300" font-family="${FONT}" font-size="34" fill="#fff" font-weight="600">Every decision lands three months late.</text>
-  <text x="415" y="350" font-family="${FONT}" font-size="34" fill="rgba(255,255,255,0.88)">The forecast lies to you until August.</text>
+  <text x="415" y="300" font-family="${FONT}" font-size="34" fill="#fff" font-weight="600">How hard can it be?</text>
+  <text x="415" y="350" font-family="${FONT}" font-size="34" fill="rgba(255,255,255,0.88)">Ten minutes to find out.</text>
 
   ${pips(6, 415, 410, 58, 11)}
 
