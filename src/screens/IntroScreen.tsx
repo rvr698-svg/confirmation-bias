@@ -25,9 +25,9 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
           <Mascot mood="keen" size={116} />
           <div>
             <span className="eyebrow">
-              A game about the thing nobody outside admissions understands
+              A management game about a job where nothing you do shows up for three months
             </span>
-            <h1 className="title">Cycle</h1>
+            <h1 className="title">Confirmation Bias</h1>
           </div>
         </div>
         <hr className="rule" />
@@ -39,9 +39,9 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
           from September to Clearing, and a target of {fmt(BASELINE.target)}.
         </p>
         <p className="lede" style={{ marginTop: 14 }}>
-          Every decision you make lands three to five turns later. You will get a forecast each turn
-          and it will be wrong in ways you cannot see. Recruiting too many is as bad as recruiting
-          too few, and considerably more expensive.
+          Every decision you make lands three to five turns after you make it, and the forecast you
+          are shown leans the same way all year. You will not notice until August. Recruiting too
+          many is as bad as recruiting too few, and considerably more expensive.
         </p>
 
         <div className="intro-list">
