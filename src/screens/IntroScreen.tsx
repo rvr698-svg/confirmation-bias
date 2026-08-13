@@ -28,9 +28,6 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
         <div className="intro-head">
           <Mascot mood="keen" size={116} />
           <div>
-            <span className="eyebrow">
-              A management game about a job where nothing you do shows up for three months
-            </span>
             <h1 className="title">Admissions!</h1>
           </div>
         </div>
