@@ -128,6 +128,49 @@ export const DECISIONS: Decision[] = [
 
   // ---------------------------------------------------------------- TURN 2
   {
+    /**
+     * Conditions are set when the offer is made, not in June. This used to sit
+     * on turn 8, which had you deciding in June what you had already been
+     * sending out since October.
+     *
+     * It is the purest version of the whole game: you choose in October and
+     * you find out on results day, so every effect here lands on turn 10.
+     */
+    id: 'd2-conditions',
+    turn: 2,
+    question: 'What conditions go on the offers?',
+    context:
+      'Offers start going out this month and the conditions go out with them. Nothing you choose here shows up until results day.',
+    options: [
+      {
+        id: 'standard',
+        label: 'Standard conditions',
+        blurb: 'As published. As expected. As defensible in August.',
+        effects: [],
+      },
+      {
+        id: 'reduce',
+        label: 'Set them a grade below the published offer',
+        blurb: 'Quietly, across the board. It will look generous in October.',
+        effects: [
+          { lever: 'conditionsMet', op: 'add', value: 0.06, delay: 8, note: 'the softer conditions meant far more firms confirmed in August' },
+          { lever: 'entryProfile', op: 'add', value: -2, delay: 8, note: 'the softer conditions cut the entry profile' },
+        ],
+      },
+      {
+        id: 'unconditional',
+        label: 'Make some of them unconditional',
+        blurb: 'Certainty for them. Certainty for you. A paragraph in a sector newsletter.',
+        effects: [
+          { lever: 'unconditionalShare', op: 'add', value: 0.14, delay: 8, note: 'the unconditional offers guaranteed those places' },
+          { lever: 'firmRate', op: 'add', value: 0.006, delay: 2, note: 'the unconditional offers pulled in extra firms' },
+          { lever: 'access', op: 'add', value: 0.006, delay: 4, note: 'the unconditional offers helped some access applicants commit' },
+          { lever: 'entryProfile', op: 'add', value: -3.5, delay: 8, note: 'the unconditional offers cut the entry profile sharply' },
+        ],
+      },
+    ],
+  },
+  {
     id: 'd2-entry',
     turn: 2,
     question: 'Where do you position entry requirements for next year?',
@@ -591,6 +634,47 @@ export const DECISIONS: Decision[] = [
 
   // ---------------------------------------------------------------- TURN 8
   {
+    /**
+     * June. Firm and insurance are known, results are not, and every faculty
+     * wants a number they can plan against. You are not deciding the number;
+     * you are deciding how much of your own uncertainty to hand over.
+     */
+    id: 'd8-deans',
+    turn: 8,
+    question: 'The Deans want a number for September. What do you give them?',
+    context:
+      'You have a projection with a wide error bar and eleven faculties who will each treat whatever you say as a promise.',
+    options: [
+      {
+        id: 'range',
+        label: 'The range, with the risk in writing',
+        blurb: 'Honest, unhelpful, and a fortnight of meetings about the lower end.',
+        effects: [
+          { lever: 'team', op: 'add', value: -2, delay: 0, note: 'explaining the forecast range took a fortnight of meetings' },
+          { lever: 'target', op: 'add', value: -40, delay: 0, note: 'the June paper brought expectations down a little' },
+        ],
+      },
+      {
+        id: 'top',
+        label: 'The top of the range',
+        blurb: 'Everyone leaves the room happy. Somebody writes it down.',
+        effects: [
+          { lever: 'target', op: 'add', value: 60, delay: 0, note: 'the number you gave the Deans became the number expected of you' },
+          { lever: 'team', op: 'add', value: -3, delay: 2, note: 'the optimistic June number came back as pressure in August' },
+        ],
+      },
+      {
+        id: 'toosoon',
+        label: 'Tell them it is too early to say',
+        blurb: 'Correct, and useless to everybody who has to timetable.',
+        effects: [
+          { lever: 'team', op: 'add', value: 2, delay: 0, note: 'declining to forecast bought your team a quiet fortnight' },
+          { lever: 'spend', op: 'add', value: 25, delay: 3, note: 'planning blind cost you agency cover in August' },
+        ],
+      },
+    ],
+  },
+  {
     id: 'd8-position',
     turn: 8,
     question: 'Firm and insurance decisions are in. Where do you put your effort?',
@@ -630,41 +714,6 @@ export const DECISIONS: Decision[] = [
       },
     ],
   },
-  {
-    id: 'd8-conditions',
-    turn: 8,
-    question: 'How do you set conditions?',
-    context: 'What you set now decides how many people you can legitimately confirm in August.',
-    options: [
-      {
-        id: 'standard',
-        label: 'Standard conditions',
-        blurb: 'As offered. As published. As expected.',
-        effects: [],
-      },
-      {
-        id: 'reduce',
-        label: 'Reduce conditions for firm holders',
-        blurb: 'One grade off, quietly, for anyone who has firmed you.',
-        effects: [
-          { lever: 'conditionsMet', op: 'add', value: 0.06, delay: 1, note: 'reduced conditions meant far more firms confirmed' },
-          { lever: 'entryProfile', op: 'add', value: -2, delay: 2, note: 'reduced conditions cut the entry profile' },
-        ],
-      },
-      {
-        id: 'unconditional',
-        label: 'Convert some offers to unconditional',
-        blurb: 'Certainty for them. Certainty for you. A paragraph in a sector newsletter.',
-        effects: [
-          { lever: 'unconditionalShare', op: 'add', value: 0.14, delay: 1, note: 'unconditional offers guaranteed those places' },
-          { lever: 'firmRate', op: 'add', value: 0.006, delay: 0, note: 'unconditional offers pulled in extra firms' },
-          { lever: 'access', op: 'add', value: 0.006, delay: 2, note: 'unconditional offers helped some access applicants commit' },
-          { lever: 'entryProfile', op: 'add', value: -3.5, delay: 2, note: 'unconditional offers cut the entry profile sharply' },
-        ],
-      },
-    ],
-  },
-
   // ---------------------------------------------------------------- TURN 9
   {
     id: 'd9-prep',
@@ -915,8 +964,9 @@ export const DECISION_NAMES: Record<string, string> = {
   'd6-competitor': 'Competitor response',
   'd7-conversion': 'Offer conversion activity',
   'd7-applicantdays': 'Applicant day investment',
+  'd8-deans': 'The number you gave the Deans',
   'd8-position': 'Firm and insurance position',
-  'd8-conditions': 'Condition setting',
+  'd2-conditions': 'Offer conditions',
   'd9-prep': 'Confirmation preparation',
   'd9-accommodation': 'Accommodation and capacity planning',
   'd10-nearmiss': 'Near miss policy',

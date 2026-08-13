@@ -262,7 +262,7 @@ export const EVENT_LIBRARY: GameEvent[] = [
     window: [6, 8],
     weight: 6,
     headline: 'The Vice-Chancellor gave an interview',
-    copy: 'Local radio, Tuesday morning. The phrase used was "significant growth this September". Nobody had told them the offer stage was closed.',
+    copy: 'Local radio, Tuesday morning. The phrase used was "significant growth this September". Nobody asked admissions whether that was a number anybody could deliver, and on your current projection it is not.',
     effects: [
       { lever: 'target', op: 'add', value: 90, delay: 0, note: 'a public growth commitment raised your effective target' },
       { lever: 'team', op: 'add', value: -3, delay: 0, note: 'the interview generated a week of internal questions' },

@@ -14,12 +14,17 @@
  */
 
 export const CLEARING = {
-  /** The whole session, in seconds. The clock is on screen throughout. */
-  seconds: 100,
+  /**
+   * The whole session, in seconds, for all of the calls. Deliberately less
+   * time than a careful person needs: about six seconds a call, against a
+   * decision that has a real trade-off in it. Being too slow is not a
+   * penalty, it is a caller ringing somebody else.
+   */
+  seconds: 55,
   /** How many calls come through. Drawn from the pool below. */
   callCount: 8,
   /** Under this many seconds the clock goes red and starts counting louder. */
-  panicSeconds: 20,
+  panicSeconds: 15,
   /** Each call taken adds this to the Clearing share of intake. */
   sharePerCall: 0.007,
   /** Each call taken costs the team this much. It is a long day. */
