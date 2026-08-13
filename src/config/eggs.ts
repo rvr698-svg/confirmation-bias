@@ -14,10 +14,11 @@
 export const TOASTS: string[] = [
   'Cheers. To the ones who firmed.',
   'To absent colleagues, and the ones on annual leave.',
-  'To whoever invented the mail merge. Not to whoever broke it.',
+  'To the portal. May it stay up until Friday.',
   'To August. May it be brief.',
   'Here is to the number. Whatever it turns out to be.',
   'To the applicant who read the entry requirements. Wherever they are.',
+  'To whoever set up the automated offer emails. May they never leave.',
 ]
 
 /**

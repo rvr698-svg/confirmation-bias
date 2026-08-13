@@ -154,12 +154,33 @@ export default function Mascot({
             strokeWidth="1.5"
           />
         ))}
-        {/* the raised mug, for when somebody clicks her */}
+        {/* the raised mug: an arm out of the shoulder, clear of her face */}
         {toasting && (
           <g className="toast-mug">
-            <path d="M 88 62 h 14 v 10 a 5 5 0 0 1 -14 0 z" fill="#fff" stroke={INK} strokeWidth="2.2" />
-            <path d="M 102 64 q 5 0 5 4 q 0 4 -5 4" fill="none" stroke={INK} strokeWidth="2.2" />
-            <path d="M 90 58 q 3 -5 0 -9 M 96 58 q 3 -5 0 -9" fill="none" stroke={PALETTE.line} strokeWidth="1.8" strokeLinecap="round" />
+            <path
+              d="M 84 106 q 16 -4 14 -34"
+              fill="none"
+              stroke={INK}
+              strokeWidth="13"
+              strokeLinecap="round"
+            />
+            <path
+              d="M 84 106 q 16 -4 14 -34"
+              fill="none"
+              stroke={SKIN}
+              strokeWidth="8.5"
+              strokeLinecap="round"
+            />
+            <path d="M 91 58 h 15 v 11 a 5.5 5.5 0 0 1 -15 0 z" fill="#fff" stroke={INK} strokeWidth="2.2" />
+            <path d="M 106 60 q 5.5 0 5.5 4.5 q 0 4.5 -5.5 4.5" fill="none" stroke={INK} strokeWidth="2.2" />
+            <path
+              d="M 95 54 q 3 -5 0 -9 M 102 54 q 3 -5 0 -9"
+              fill="none"
+              stroke={INK}
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              opacity="0.45"
+            />
           </g>
         )}
       </svg>
