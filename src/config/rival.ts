@@ -6,8 +6,8 @@
  * take the calls you are too slow to answer, and they move first when it suits
  * them.
  *
- * NAME NEEDS SIGN-OFF. It is invented, and it must not match a real UK
- * provider. See `docs/cast-sheet.md`.
+ * The name is invented and signed off. If a real provider ever turns out to
+ * be called this, it changes in one line here.
  */
 
 export const RIVAL = {

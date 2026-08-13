@@ -10,8 +10,8 @@
  * says "she". Marcus Lidell's copy never states any, so they is used until it
  * is signed off. See `docs/cast-sheet.md`.
  *
- * LOOKS are PROPOSED and need sign-off. They are deliberately not a guess from
- * anybody's surname. Change any one of them in a word.
+ * LOOKS are signed off. They are deliberately not a guess from anybody's
+ * surname. Change any one of them in a word.
  */
 
 import type { Look } from './looks'

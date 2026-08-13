@@ -143,8 +143,8 @@ start folded on a short window.
    the default, not a guess.
 5. **No appearance is a gender marker.** Hair, glasses and collars are authored per character in
    `cast.ts` and no style may belong to one pronoun alone — there is a test for that too. The joke is
-   always the behaviour, never how somebody looks. Depictions need sign-off: see
-   `docs/cast-sheet.md`.
+   always the behaviour, never how somebody looks. The cast is signed off in `docs/cast-sheet.md`;
+   change a depiction there and in `cast.ts` together, never one without the other.
 6. **UK-wide, HE and FE in the wording.** No "English", no assumption of a university. The model is
    still a UCAS undergraduate pipeline and FE is an open scope decision, not an oversight.
 7. **The situation is real, the spin is absurd.** Theme Hospital's rule. Verdicts, breach lines, band
@@ -172,8 +172,9 @@ start folded on a short window.
     say in are excluded from the debrief.
 15. **Levers in real units** (`spend`, `target`, `teachingCapacity`, `accommodationBeds`,
     `placementSupply`) bypass the event multiplier. 220 beds is 220 beds.
-16. Config values are PLACEHOLDER and need sign-off. See the header of `config.ts`, the
-    application-volume note in `README.md`, and `docs/cast-sheet.md` for the people.
+16. Config values are PLACEHOLDER and need sign-off, with four exceptions already agreed: the cast
+    and their looks (`docs/cast-sheet.md`), the rival's name, and `LEAGUE.sensitivity`. See the
+    header of `config.ts` and the application-volume note in `README.md` for the rest.
 
 ## Open scope decisions, not oversights
 

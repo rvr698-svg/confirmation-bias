@@ -1,15 +1,14 @@
-# Cast sheet — for sign-off
+# Cast sheet — signed off
 
-The twelve senior colleagues who interrupt you, and how they are drawn. Mark this up and I will
-apply it. Everything here maps to one line in `src/config/cast.ts`.
+The twelve senior colleagues who interrupt you, and how they are drawn. **Agreed as it stands.**
+Everything here maps to one line in `src/config/cast.ts`, so any of it can still be changed in a
+word if it stops feeling right in front of an audience.
 
-**Pronouns are not a proposal.** They are read from each character's own authored copy in
-`src/config/interruptions.ts`, which was already internally consistent. One exception is flagged
-below. `tests/cast.test.ts` fails if a pronoun and its copy ever disagree again.
+**Pronouns** are read from each character's own authored copy in `src/config/interruptions.ts`.
+`tests/cast.test.ts` fails if a pronoun and its copy ever disagree.
 
-**Looks are a proposal** and none of them is a guess from a surname. A name does not tell you what
-somebody looks like, so the cast is varied deliberately rather than mapped from name origins. If any
-individual depiction is wrong for the audience, say so and it changes in a word.
+**Looks** are not a guess from a surname. A name does not tell you what somebody looks like, so the
+cast is varied deliberately rather than mapped from name origins.
 
 ## The cast
 
@@ -32,19 +31,18 @@ Marge, Deputy Head of Admissions, is the player's ally rather than an interrupte
 a middle management admissions role, which matches the pattern you described. She is drawn
 separately in `src/components/Mascot.tsx` and is not in this table.
 
-## The three decisions I need from you
+## The three questions, and how they were settled
 
-1. **Marcus Lidell's pronouns.** The only character whose copy never states any. The "her" in that
-   card — *"on a screen in her office. She will look at it during the day"* — is the
-   Vice-Chancellor, not Marcus. They is used until you say otherwise, and the test that checks
-   pronoun agreement lists this card as the one deliberate exception.
-2. **Ties.** Three characters wear one: Vance, Mbatha and Lidell. No woman in the cast does. That
-   reflects how ties are actually worn, but it is a visual pattern, so it is your call whether it
-   stays.
-3. **Religious and cultural dress.** Nobody is drawn in a headscarf, turban or kippah. I did not
-   want to infer anyone's faith from their name, which is exactly the stereotyping you asked me to
-   avoid. If you want that representation in the cast, tell me which characters and I will add the
-   silhouettes to the palette.
+1. **Marcus Lidell's pronouns — they/them.** The only character whose copy never states any. The
+   "her" in that card — *"on a screen in her office. She will look at it during the day"* — is the
+   Vice-Chancellor, not Marcus. `tests/cast.test.ts` lists this card as the one deliberate exception
+   to the pronoun-agreement check, so the ambiguity cannot be forgotten.
+2. **Ties — as they are.** Three characters wear one: Vance, Mbatha and Lidell. No woman in the cast
+   does. Raised as a visual pattern, reviewed, kept.
+3. **Religious and cultural dress — not in the cast.** Nobody is drawn in a headscarf, turban or
+   kippah, because inferring anyone's faith from their name is the stereotyping this sheet exists to
+   avoid. If it should be represented later, name the characters and the silhouettes go into
+   `looks.ts`; nobody's appearance will be derived from their surname.
 
 ## What the tests now enforce
 

@@ -5,7 +5,7 @@
  * hard-coded in a component. Expect to tune these repeatedly.
  *
  * =====================================================================
- * SIGN-OFF REQUIRED - RACHEL
+ * SIGN-OFF REQUIRED
  * =====================================================================
  * All values marked PLACEHOLDER are unsigned. They are plausible for a
  * mid-tariff UK provider but they are not sourced. Do not show this
@@ -37,7 +37,7 @@
  *
  * So all seven briefed rates are used verbatim and BASELINE.applications is
  * set to 27,000, the volume they imply. The briefed figure is preserved below
- * in BRIEFED_AS_WRITTEN for comparison. If Rachel would rather hold 18,000,
+ * in BRIEFED_AS_WRITTEN for comparison. If the brief would rather hold 18,000,
  * the fix is to raise firmRate to about 0.29, and this note should be revisited.
  *
  * 27,000 rather than 27,500 is deliberate. It lands a do-nothing cycle about
@@ -268,9 +268,8 @@ export const LEAGUE = {
   startPosition: 64,
   /**
    * Places moved per point of composite score. At 0.85 a very good cycle is
-   * worth about twenty places and a disaster costs about thirty, which is
-   * dramatic but not silly. PLACEHOLDER, and the first dial to turn if the
-   * movement reads as implausible to the sector.
+   * worth about twenty places and a disaster costs about thirty: dramatic but
+   * not silly. Signed off at this value.
    */
   sensitivity: 0.85,
   weights: { entry: 0.42, completion: 0.24, resource: 0.16, reputation: 0.18 },

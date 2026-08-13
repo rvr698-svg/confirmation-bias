@@ -5,8 +5,7 @@
  * coded to a gender: any hair goes with any pronoun, any collar with any role.
  * The joke is always the behaviour, never the person's appearance.
  *
- * Every value is PROPOSED and needs sign-off. Changing a character's
- * appearance is one word in `cast.ts`.
+ * Signed off. Changing a character's appearance is one word in `cast.ts`.
  */
 
 export type SkinTone = 'light' | 'fair' | 'olive' | 'tan' | 'brown' | 'deep'

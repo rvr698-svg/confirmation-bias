@@ -26,8 +26,8 @@ The dev server runs on port 5273 because 5173 is taken by another project on thi
 
 ## Before this goes anywhere near a client
 
-Read the header of `src/config/config.ts`. Every constant is marked PLACEHOLDER and needs Rachel's
-sign-off. One item needs a decision rather than a tick:
+Read the header of `src/config/config.ts`. Every constant is marked PLACEHOLDER and needs sign-off.
+One item needs a decision rather than a tick:
 
 **The brief's application volume does not reconcile with its target.** 18,000 applications at the
 briefed rates produces about 2,490 enrolments against a 3,800 target, which starts the player 1,300
@@ -107,8 +107,8 @@ noticing. They are recorded as your decisions, so the debrief can name them.
 touching a word of writing. Every line the game writes about a colleague is built from that
 character's pronoun set rather than typed out, and no hairstyle, collar or pair of glasses belongs to
 one pronoun alone. `tests/cast.test.ts` fails if either of those stops being true.
-`docs/cast-sheet.md` is the sign-off sheet: twelve people, their pronouns, their proposed looks and
-the three questions still open.
+`docs/cast-sheet.md` is the signed-off cast: twelve people, their pronouns, their looks, and the
+three questions that were raised and settled.
 
 ## Tone
 
