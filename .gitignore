@@ -11,3 +11,5 @@ dist/
 
 # marketing drafts and social assets, not for the public repo
 assets/social/
+# the poster generator: a local tool, and it needs sharp, which is not a dependency
+scripts/poster.tsx

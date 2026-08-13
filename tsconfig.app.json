@@ -18,5 +18,9 @@
     "noFallthroughCasesInSwitch": true,
     "erasableSyntaxOnly": true
   },
-  "include": ["src", "tests", "scripts"]
+  "include": ["src", "tests", "scripts"],
+  // The poster generator is a local tool, kept out of the repository, and it
+  // needs sharp, which is not a project dependency. Excluded so that having it
+  // on disk cannot break the build the way it did once already.
+  "exclude": ["scripts/poster.tsx"]
 }
