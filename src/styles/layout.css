@@ -148,12 +148,25 @@
 
 /* ------------------------------------------------------------------ tour */
 
+/* The scrim dims but does not block: the first step asks the player to open a
+   panel, so the panel has to be clickable through it. */
 .tour {
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(27, 26, 43, 0.55);
+  pointer-events: none;
   animation: scrimin 0.2s ease-out;
+}
+
+.tour-caption {
+  pointer-events: auto;
+}
+
+.tour-prompt {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--brand-dark);
 }
 
 /* The ring is a hole in the scrim: a huge shadow paints everything outside it. */

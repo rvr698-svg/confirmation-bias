@@ -2,11 +2,14 @@
  * CONFIRMATION BIAS - the three things you need to know.
  *
  * Testers were missing the rail entirely: they never opened the team panel and
- * never noticed the tray of decisions they had already taken. Three steps, no
+ * then wondered, in the debrief, why half the team had left. Three steps, no
  * more, shown once at the start of the first turn.
  *
- * Nothing is stored, so it is once per session rather than once per person.
- * Anyone who skips it can find everything again by looking at the screen.
+ * The first step is the important one, so it does not just describe the team
+ * panel: it asks the player to open it, and opening it is what moves the tour
+ * on. Anybody who would rather not can press Next.
+ *
+ * Nothing is stored, so this is once per session rather than once per person.
  */
 
 export interface TourStep {
@@ -14,13 +17,22 @@ export interface TourStep {
   target: string
   title: string
   body: string
+  /**
+   * A `<details>` on the page. Opening it advances the tour, so the player
+   * learns the panel exists by using it rather than by being told.
+   */
+  openTarget?: string
+  /** Shown under the caption while that panel is still shut. */
+  prompt?: string
 }
 
 export const TOUR: TourStep[] = [
   {
     target: '.rail',
-    title: 'Everything true right now',
-    body: 'Your projected intake, the five measures, and three panels that are folded up: your team, the decisions still in the post, and how the intake splits across departments. Open them. People miss the team one and then wonder where Gemma went.',
+    title: 'Watch your team',
+    body: 'Down here is everything true right now: your projected intake, the five measures, and two panels folded away. The one that matters is your team. Four named people who get stretched, start looking for other jobs, and leave — and the numbers will not warn you first.',
+    openTarget: '.team-strip',
+    prompt: 'Open “The team” to carry on.',
   },
   {
     target: '.deck',
@@ -30,6 +42,6 @@ export const TOUR: TourStep[] = [
   {
     target: '.actionbar',
     title: 'The way out',
-    body: 'This tells you how many cards are still waiting and takes you to the next month. Nothing you decide will show up for another three to five turns, so press it with confidence and find out in August.',
+    body: 'This says how many cards are still waiting and takes you to the next month. Nothing you decide will show up for another three to five turns, so press it with confidence and find out in August.',
   },
 ]

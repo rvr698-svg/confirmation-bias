@@ -36,6 +36,21 @@ export default function Tour({ onDone }: { onDone: () => void }) {
     return () => window.removeEventListener('resize', update)
   }, [current])
 
+  // Learn it by using it: opening the panel is what moves the tour on.
+  useEffect(() => {
+    if (!current.openTarget) return
+    const el = document.querySelector(current.openTarget) as HTMLDetailsElement | null
+    if (!el) return
+
+    const onToggle = () => {
+      if (!el.open) return
+      if (step < TOUR.length - 1) setStep(step + 1)
+      else onDone()
+    }
+    el.addEventListener('toggle', onToggle)
+    return () => el.removeEventListener('toggle', onToggle)
+  }, [current, step, onDone])
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onDone()
@@ -81,6 +96,8 @@ export default function Tour({ onDone }: { onDone: () => void }) {
         </span>
         <h2 className="tour-title">{current.title}</h2>
         <p className="tour-body">{current.body}</p>
+
+        {current.prompt && <p className="tour-prompt">{current.prompt}</p>}
 
         <div className="tour-actions">
           <button
