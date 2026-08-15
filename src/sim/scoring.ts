@@ -28,25 +28,33 @@ export const SCORING = {
     /** Deviation from target forgiven entirely. */
     tolerance: MEASURE_TARGET.intakeTolerance,
     /** Points lost per percentage point under target, beyond tolerance. */
-    underSlope: 3.2,
+    underSlope: 2.5,
     /** Points lost per percentage point over target, beyond tolerance. */
-    overSlope: 2.6,
-    /** Extra points lost per capacity place breached, as a share of target. */
-    breachSlope: 130,
+    overSlope: 2.1,
+    /**
+     * Extra points lost per capacity place breached, as a share of target.
+     * Softened from 130: a breach was costing the intake measure more than
+     * missing the number by ten per cent did, so the moment you tipped over a
+     * ceiling the rest of the cycle stopped mattering. It should be a bad
+     * afternoon, not the end of the argument.
+     */
+    breachSlope: 85,
   },
   access: { floor: 0.28, ceiling: 0.42 },
   budget: {
     /** Spend ratio at or below which the budget is fully clean. */
-    clean: 0.92,
+    clean: 0.95,
     /** Points lost per percentage point of overspend beyond clean. */
-    slope: 3.2,
+    slope: 2.8,
   },
   /**
-   * Ceiling lowered from 80 once bright ideas were added. Every senior
-   * colleague with an initiative costs the team a few points, and without
-   * this a player who actively protected them could still never reach Strong.
+   * Ceiling lowered from 80 once bright ideas were added, and again to 70 when
+   * the harness said a player who spent the whole cycle protecting the team
+   * still only reached Strong on team in one run in twenty. Every senior
+   * colleague with an initiative costs the team a few points, and defending
+   * against that has to be worth doing.
    */
-  team: { floor: 8, ceiling: 74 },
+  team: { floor: 8, ceiling: 70 },
 } as const
 
 function bandFor(score: number): Band {

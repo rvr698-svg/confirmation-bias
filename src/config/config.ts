@@ -153,14 +153,21 @@ export const SATURATION: Partial<Record<import('../sim/types').Lever, number>> =
 /**
  * Hard numbers. Exceeding these does not cap intake, it causes a crisis.
  * All PLACEHOLDER.
+ *
+ * Teaching is the tripwire and the other two are slack behind it. Set level
+ * with each other they all broke at once, so a cycle six per cent over target
+ * paid three separate crises for one mistake and two thirds of all playthroughs
+ * ended in a breach. Over-recruitment should fail once, loudly, not three
+ * times. Teaching still has to break before +10% or over-recruitment stops
+ * being a distinct failure at all, which is an acceptance criterion.
  */
 export const CAPACITY = {
-  /** Timetabled teaching capacity in first-year places. Breaches at +9%. */
-  teaching: 4_150,
-  /** Beds in the accommodation guarantee. Breaches at +9%. */
-  accommodation: 2_560,
-  /** Placement partnerships available to health and education. Breaches at +12%. */
-  placement: 940,
+  /** Timetabled teaching capacity in first-year places. Breaches at +10%. */
+  teaching: 4_170,
+  /** Beds in the accommodation guarantee. Breaches at +13%. */
+  accommodation: 2_660,
+  /** Placement partnerships available to health and education. Breaches at +18%. */
+  placement: 990,
   /** Share of intake taking up the accommodation guarantee. */
   accommodationTakeUp: 0.62,
   /** Share of intake on placement-bearing courses. */
@@ -218,8 +225,14 @@ export const MEASURE_BASE = {
 
 /** Where each measure needs to land. All PLACEHOLDER. */
 export const MEASURE_TARGET = {
-  /** Intake within this share of target counts as on the number. */
-  intakeTolerance: 0.02,
+  /**
+   * Intake within this share of target counts as on the number. Widened from
+   * 0.02: two per cent of 3,800 is 76 students, which is finer than the
+   * forecast can see even on turn 9, so landing on the number was closer to
+   * luck than to judgement. Three per cent is 114, which a player watching the
+   * projection can actually aim at.
+   */
+  intakeTolerance: 0.03,
   entryProfile: 99,
   access: 0.38,
   team: 60,
@@ -386,9 +399,10 @@ export const EVENTS = {
    * turns of events each costing the team a few points stacked past the
    * saturation ceiling on their own, so every playthrough finished with the
    * same wrecked team whatever the player chose. That makes team a tax rather
-   * than a lever. PLACEHOLDER.
+   * than a lever. Dialled again from 0.42 for the same reason: it was still
+   * costing more than protecting them could earn back. PLACEHOLDER.
    */
-  teamImpact: 0.42,
+  teamImpact: 0.34,
 } as const
 
 /**
