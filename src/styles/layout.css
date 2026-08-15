@@ -467,6 +467,15 @@
  * a summary bar at this height (see `useIsPhone`); this strips the rest back to
  * what the turn cannot be played without. The strap is the turn's flavour line
  * and the month is already in the top bar, so those are what go.
+ *
+ * The pips go for the same reason they go on a narrow window: the turn counter
+ * beside them already says where you are, and sideways is the shape with the
+ * least room for anything saying it twice. This buys the card no height — the
+ * top bar is 38 points either way, set by the wordmark, not by eight points of
+ * pip — so it is a tidiness rule, not a space one. It is here because phone
+ * mode is narrow OR short and the pips were only going on narrow, which left
+ * the rail summarised and the pips still sitting above it. Matches the
+ * `useIsPhone` breakpoints. Change one, change both.
  */
 @media (max-height: 560px) {
   .topbar,
@@ -476,6 +485,9 @@
   }
   .topbar {
     gap: 10px;
+  }
+  .pips {
+    display: none;
   }
   .play-main {
     padding: 6px 16px 2px;
