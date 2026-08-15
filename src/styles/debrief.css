@@ -444,6 +444,13 @@
   padding: 12px 16px;
 }
 
+/* Wide content scrolls inside its own box. The document never goes sideways. */
+.table-wrap {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 .forecast-table {
   width: 100%;
   border-collapse: collapse;
@@ -596,5 +603,25 @@
   }
   .title {
     font-size: 34px;
+  }
+}
+
+/* Phones: squeeze the table first, so it mostly fits before it has to scroll. */
+@media (max-width: 640px) {
+  .forecast-table {
+    font-size: 12.5px;
+  }
+  .forecast-table th {
+    font-size: 9.5px;
+    padding-right: 8px;
+  }
+  .forecast-table td {
+    padding: 7px 8px 7px 0;
+  }
+  .subject-name {
+    white-space: normal;
+  }
+  .subject-note {
+    font-size: 12px;
   }
 }

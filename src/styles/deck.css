@@ -92,6 +92,15 @@
   padding: 3px 10px;
 }
 
+/*
+ * A short card sits centred; a long one starts at the top and scrolls.
+ *
+ * `safe` is doing the work. Plain `center` centres the overflow too, which puts
+ * the first line of the question above the scroll origin where nothing can
+ * reach it -- the card scrolled, but never back up to the question it was
+ * asking. `safe center` falls back to `start` the moment the content does not
+ * fit, so the question is always the first thing you read.
+ */
 .deck-card-body {
   flex: 1 1 auto;
   min-height: 0;
@@ -99,7 +108,7 @@
   overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: safe center;
   gap: 4px;
 }
 
@@ -465,13 +474,7 @@
     font-size: 12.5px;
   }
   .deck-tab {
-    min-height: 34px;
-    min-width: 34px;
     justify-content: center;
-  }
-  .step {
-    width: 46px;
-    height: 38px;
   }
   .clearing-clock {
     padding: 6px 12px;
@@ -479,6 +482,60 @@
   }
   .clock-face {
     font-size: 24px;
+  }
+  .clock-rule {
+    display: none;
+  }
+}
+
+/*
+ * Finger-sized, wherever there is a finger.
+ *
+ * The tabs and the arrows are the only way back to a card you have already
+ * answered, and they were 34px dots -- under the target size, and a miss lands
+ * on the card behind them. Keyed off the pointer rather than the width, because
+ * a phone held sideways is 667 points wide and still being prodded.
+ */
+@media (pointer: coarse) {
+  .deck-tab {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .step {
+    width: 48px;
+    height: 44px;
+  }
+}
+
+/* Sideways: the card takes what the furniture gave back. */
+@media (max-height: 560px) {
+  .deck {
+    gap: 6px;
+  }
+  .deck-card {
+    padding: 10px 14px 10px;
+  }
+  .deck-card-head {
+    margin-bottom: 6px;
+  }
+  .card-q {
+    font-size: 16px;
+  }
+  .card-context {
+    font-size: 13px;
+  }
+  .options {
+    margin-top: 10px;
+    gap: 7px;
+  }
+  .option {
+    padding: 9px 12px;
+  }
+  .clearing-clock {
+    padding: 4px 12px;
+  }
+  .clock-face {
+    font-size: 22px;
   }
   .clock-rule {
     display: none;

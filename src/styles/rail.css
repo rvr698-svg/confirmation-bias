@@ -529,30 +529,161 @@
   }
 }
 
-/* Phones: the strip stays, tighter, and the panels stay wide enough to read. */
+/*
+ * No room for a rail: one line, and a sheet behind it.
+ *
+ * The rail becomes a single summary bar carrying the only reading that has to
+ * be permanently visible -- projected intake against target. Everything else
+ * lives in a sheet that opens over the board. Nothing scrolls sideways, and the
+ * card gets back the hundred pixels the lying-down strip used to take.
+ *
+ * These rules carry no media query on purpose. `is-phone` is set by
+ * `useIsPhone`, so the markup and the styling switch on the same condition and
+ * cannot disagree -- which is what would happen the next time somebody edited
+ * one breakpoint and not the other.
+ */
+.rail.is-phone {
+  display: block;
+  flex: 0 0 auto;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  z-index: 30;
+}
+
+.rail-fold summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.rail-fold summary::-webkit-details-marker {
+  display: none;
+}
+
+.rail-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--brand-wash);
+  box-shadow: var(--pop-sm);
+}
+
+.rail-sum-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.rail-sum-value {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--brand);
+}
+
+.rail-sum-value.warn {
+  color: var(--gold);
+}
+
+.rail-sum-value.bad {
+  color: var(--bad);
+}
+
+.rail-sum-target {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* The affordance the sideways strip never had. */
+.rail-sum-more {
+  margin-left: auto;
+  align-self: center;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--brand);
+  border-radius: 100px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.rail-sum-more::after {
+  content: ' \25BE';
+}
+
+.rail-fold[open] .rail-sum-more::after {
+  content: ' \25B4';
+}
+
+/* Opens over the card, never pushes it. Capped so the board stays put. */
+.rail-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 31;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: min(62vh, 460px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 10px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--wash);
+  box-shadow: 0 8px 0 var(--ink), 0 14px 30px rgba(27, 26, 43, 0.28);
+}
+
+.rail-sheet > * {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+/* The sheet has the width the strip never did, so the detail comes back. */
+.rail-sheet .pipeline {
+  display: block;
+}
+
+.rail-sheet .panel {
+  padding: 10px 12px;
+  border-width: 2px;
+}
+
+.rail-sheet .forecast-value {
+  font-size: 30px;
+}
+
+.rail-sheet .chips {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.rail-sheet .chip {
+  padding: 6px 8px;
+}
+
+.rail-sheet .chip-label {
+  font-size: 9px;
+}
+
+.rail-sheet .chip-value {
+  font-size: 12.5px;
+}
+
 @media (max-width: 640px) {
-  .rail {
-    gap: 8px;
-    padding-bottom: 4px;
-  }
-  .rail-panel,
-  .chips,
-  .warn-strip {
-    min-width: 210px;
-  }
   .panel {
     padding: 10px 12px;
     border-width: 2px;
-  }
-  .forecast-value {
-    font-size: 30px;
-  }
-  .chips {
-    grid-template-columns: repeat(2, 118px);
-    gap: 6px;
-  }
-  .chip {
-    padding: 6px 8px;
   }
   .chip-label {
     font-size: 9px;
@@ -560,30 +691,32 @@
   .chip-value {
     font-size: 12.5px;
   }
-  .mascot-bar.compact {
-    min-width: 250px;
-  }
 }
 
-/* Lying down: rail becomes a strip across the top. The pipeline detail is the
-   first thing to go, because the projection and the chips are the read. */
+/*
+ * Tablets: the rail lies down as a strip across the top. The pipeline detail is
+ * the first thing to go, because the projection and the chips are the read.
+ *
+ * Everything here is scoped off the phone rail, which is a summary bar and a
+ * sheet rather than a strip -- see the phone block above.
+ */
 @media (max-width: 1040px) {
-  .rail {
+  .rail:not(.is-phone) {
     flex-direction: row;
     align-items: stretch;
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 6px;
   }
-  .rail .pipeline {
+  .rail:not(.is-phone) .pipeline {
     display: none;
   }
-  .rail-panel,
-  .chips,
-  .warn-strip {
+  .rail:not(.is-phone) .rail-panel,
+  .rail:not(.is-phone) .chips,
+  .rail:not(.is-phone) .warn-strip {
     min-width: 240px;
   }
-  .chips {
+  .rail:not(.is-phone) .chips {
     grid-template-columns: repeat(2, 130px);
   }
 }

@@ -10,6 +10,17 @@ import { FORECAST_NOISE, TOTAL_TURNS } from '../../config/config'
 
 const fmt = (n: number) => Math.round(n).toLocaleString('en-GB')
 
+/**
+ * How worried the number should look. Shared with the phone summary bar, so the
+ * headline reads the same colour whichever shape the rail is in.
+ */
+export function projectionTone(projected: number, target: number): '' | 'warn' | 'bad' {
+  const ratio = projected / target
+  if (ratio > 1.09 || ratio < 0.91) return 'bad'
+  if (ratio > 1.04 || ratio < 0.96) return 'warn'
+  return ''
+}
+
 function confidence(turn: number): { bars: number; word: string } {
   const sd = FORECAST_NOISE[turn] ?? 0
   if (sd === 0) return { bars: 5, word: 'Actual. Results are in.' }
@@ -30,8 +41,7 @@ export default function ProjectionPanel({
   target: number
   pending: number
 }) {
-  const ratio = projected / target
-  const tone = ratio > 1.09 || ratio < 0.91 ? 'bad' : ratio > 1.04 || ratio < 0.96 ? 'warn' : ''
+  const tone = projectionTone(projected, target)
   const conf = confidence(turn)
 
   return (

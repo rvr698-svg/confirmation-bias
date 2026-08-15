@@ -24,32 +24,37 @@ export default function SubjectTable({ rows }: { rows: SubjectRow[] }) {
     level: 'About right',
   }
 
+  // Five columns will not fit a phone however hard they are squeezed, and a
+  // table that does not fit used to take the whole debrief sideways with it.
+  // Now the table scrolls and the page does not.
   return (
-    <table className="forecast-table subject-table">
-      <thead>
-        <tr>
-          <th>Subject area</th>
-          <th>Target</th>
-          <th>Actual</th>
-          <th>Difference</th>
-          <th>How it landed</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r) => (
-          <tr key={r.id}>
-            <td className="subject-name">{r.name}</td>
-            <td>{fmt(r.target)}</td>
-            <td>{fmt(r.actual)}</td>
-            <td className={r.state === 'over' ? 'err-pos' : r.state === 'under' ? 'err-neg' : ''}>
-              {r.delta >= 0 ? `+${fmt(r.delta)}` : fmt(r.delta)}
-            </td>
-            <td className="subject-note">
-              {notable && r.id === notable.id && r.note ? r.note : STATE_WORD[r.state]}
-            </td>
+    <div className="table-wrap">
+      <table className="forecast-table subject-table">
+        <thead>
+          <tr>
+            <th>Subject area</th>
+            <th>Target</th>
+            <th>Actual</th>
+            <th>Difference</th>
+            <th>How it landed</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.id}>
+              <td className="subject-name">{r.name}</td>
+              <td>{fmt(r.target)}</td>
+              <td>{fmt(r.actual)}</td>
+              <td className={r.state === 'over' ? 'err-pos' : r.state === 'under' ? 'err-neg' : ''}>
+                {r.delta >= 0 ? `+${fmt(r.delta)}` : fmt(r.delta)}
+              </td>
+              <td className="subject-note">
+                {notable && r.id === notable.id && r.note ? r.note : STATE_WORD[r.state]}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }

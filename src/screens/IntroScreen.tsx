@@ -10,6 +10,7 @@
 import { BASELINE, TOTAL_TURNS } from '../config/config'
 import Mascot from '../components/Mascot'
 import Disclaimer from '../components/layout/Disclaimer'
+import { useIsPhone } from '../hooks/useIsPhone'
 
 const fmt = (n: number) => Math.round(n).toLocaleString('en-GB')
 
@@ -22,11 +23,13 @@ const MEASURES: { name: string; line: string }[] = [
 ]
 
 export default function IntroScreen({ onStart }: { onStart: () => void }) {
+  const phone = useIsPhone()
+
   return (
-    <div className="shell">
+    <div className={`shell ${phone ? 'has-launch' : ''}`}>
       <div className="intro">
         <div className="intro-head">
-          <Mascot mood="keen" size={116} />
+          <Mascot mood="keen" size={phone ? 72 : 116} />
           <div>
             <h1 className="title">Admissions!</h1>
           </div>
@@ -94,6 +97,19 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
 
         <Disclaimer />
       </div>
+
+      {/*
+        On a phone the briefing runs well past the fold, and the way in was
+        stranded at the bottom of it. This keeps it in reach the whole way down
+        without asking the reader to scroll back for it.
+      */}
+      {phone && (
+        <div className="intro-launch">
+          <button type="button" className="btn" onClick={onStart}>
+            Okay, let’s do this
+          </button>
+        </div>
+      )}
     </div>
   )
 }

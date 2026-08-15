@@ -11,7 +11,7 @@ no storage, no analytics, no personal data. All state lives in React for the ses
 
 ```bash
 npm run dev        # port 5273 (5173 is taken by another project on this machine)
-npm test           # 92 tests, including the acceptance criteria
+npm test           # 207 tests, including the acceptance criteria
 npm run harness    # 700 headless playthroughs, tuning report
 npm run build      # tsc -b && vite build
 ```
@@ -127,7 +127,8 @@ One clear job per file. If a file starts doing two things, split it.
 
 `hooks/useTurnDeck.ts` builds the deck for a turn and owns which card is showing.
 `hooks/useCountdown.ts` is the Clearing clock. `hooks/useTallViewport.ts` decides which rail panels
-start folded on a short window.
+start folded on a short window. `hooks/useIsPhone.ts` says whether there is room for a rail at all —
+narrow **or** short — and switches the rail, the tour's first step and the intro's way in.
 
 ### Styles — `src/styles/`, one file per part of the screen
 
@@ -138,8 +139,16 @@ start folded on a short window.
 
 1. **A turn never scrolls, at any width.** `.play` is fixed to the viewport and capped to it: bar,
    rail, card, action bar. If something new does not fit, compress it in the `max-height: 820px`
-   block or fold it away. On phones the rail lies down as a swipeable strip and the pips go — check
-   375px before shipping a layout change. The intro and the debrief are documents and may scroll.
+   block or fold it away. Where there is no room for a rail — under 640px wide or under 560px tall —
+   `useIsPhone` turns it into a summary bar carrying the projected intake, with the panels behind a
+   `Details` sheet that opens **over** the board rather than pushing it; the pips go too. Below 460px
+   tall the tannoy stands down. Check 375×812, 375×667 and 667×375 before shipping a layout change.
+   The intro and the debrief are documents and may scroll.
+
+   The card body centres with **`justify-content: safe center`, never plain `center`**. Plain
+   `center` centres the overflow too, parking the question above the scroll origin where nothing can
+   reach it — the card scrolls, but never back up to what it is asking. That cost up to 106px of
+   unreachable question on a phone, and the whole of it on a 667px-tall one.
 2. **No numeric literals in components.** Every displayed figure derives from `src/config/`. This is
    an acceptance criterion with a test behind it.
 3. **The interruption blocks.** It is a modal over everything, it takes focus, and Escape, the scrim

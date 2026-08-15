@@ -459,6 +459,78 @@
   }
 }
 
+/*
+ * Sideways on a phone: 375 points of height, most of it furniture.
+ *
+ * Measured, the bars, the heading, the strap and the tannoy took 277 of it and
+ * left the card 47 to exist in, of which the body got none. The rail is already
+ * a summary bar at this height (see `useIsPhone`); this strips the rest back to
+ * what the turn cannot be played without. The strap is the turn's flavour line
+ * and the month is already in the top bar, so those are what go.
+ */
+@media (max-height: 560px) {
+  .topbar,
+  .actionbar {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .topbar {
+    gap: 10px;
+  }
+  .play-main {
+    padding: 6px 16px 2px;
+    gap: 8px;
+  }
+  .work {
+    gap: 6px;
+  }
+  .work-head {
+    gap: 8px;
+  }
+  .month {
+    font-size: 17px;
+  }
+  .strap {
+    display: none;
+  }
+  .tannoy {
+    padding: 4px 12px 4px 9px;
+    gap: 8px;
+  }
+  .tannoy-line {
+    font-size: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .tannoy-horn svg {
+    width: 24px;
+    height: 24px;
+  }
+  .action-note {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+}
+
+/*
+ * Shorter still. The tannoy is the building talking to itself: the best line on
+ * the screen, and the only one the player can miss without losing the thread,
+ * because it never says anything the dashboard has not already said. At this
+ * height the choice is the announcement or the question, so it stands down and
+ * comes back the moment the phone is turned upright.
+ */
+@media (max-height: 460px) {
+  .tannoy {
+    display: none;
+  }
+  .work {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+}
+
 /* Narrow windows: the rail lies down and becomes a strip you swipe. */
 @media (max-width: 1040px) {
   .play-main {
@@ -543,5 +615,103 @@
     width: auto;
     bottom: 12px;
     top: auto !important;
+  }
+
+  /* ---------------------------------------------------------- the briefing */
+
+  /*
+   * The intro is a document and may still scroll, but it was two and a bit
+   * screens of it before the button appeared, and the head overflowed the
+   * phone sideways because the mascot and the wordmark would not sit together
+   * in 320 points. Tighter throughout, and the way in is always on screen.
+   */
+  .shell {
+    padding: 0 16px 32px;
+  }
+
+  .shell.has-launch {
+    padding-bottom: 88px;
+  }
+
+  .intro {
+    padding-top: 24px;
+  }
+
+  .intro-head {
+    gap: 12px;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 25px;
+    letter-spacing: 0.1em;
+  }
+
+  .scene {
+    margin: 18px 0 22px;
+    padding-left: 14px;
+  }
+  .scene-line {
+    font-size: 16px;
+    margin-bottom: 9px;
+  }
+  .scene-line strong {
+    font-size: 21px;
+  }
+  .scene-line.last {
+    font-size: 14px;
+  }
+
+  .intro-rules {
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .intro-rule {
+    grid-template-columns: 26px 1fr;
+    gap: 10px;
+    font-size: 14px;
+  }
+  .intro-rule-num {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .measure-cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
+    margin-bottom: 24px;
+  }
+  .measure-card {
+    padding: 8px 11px;
+    gap: 3px;
+  }
+  .measure-name {
+    font-size: 12.5px;
+  }
+  .measure-line {
+    font-size: 11.5px;
+  }
+
+  .actions {
+    margin-top: 24px;
+  }
+
+  /* The way in, pinned. */
+  .intro-launch {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--white);
+    border-top: 2px solid var(--ink);
+    box-shadow: 0 -6px 18px rgba(27, 26, 43, 0.14);
+  }
+
+  .intro-launch .btn {
+    width: 100%;
+    min-height: 46px;
   }
 }

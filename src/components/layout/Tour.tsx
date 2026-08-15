@@ -7,8 +7,9 @@
  * layout has done to fit the viewport.
  */
 
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { TOUR } from '../../config/tour'
+import { useIsPhone } from '../../hooks/useIsPhone'
 
 interface Box {
   top: number
@@ -25,9 +26,17 @@ function measure(selector: string): Box | null {
 }
 
 export default function Tour({ onDone }: { onDone: () => void }) {
+  const phone = useIsPhone()
   const [step, setStep] = useState(0)
   const [box, setBox] = useState<Box | null>(null)
-  const current = TOUR[step]
+  // Same three steps either way; where the rail has become a summary bar, the
+  // first one describes that instead of a left-hand side that is not there.
+  // Memoised because it is an effect dependency: a fresh object every render
+  // would re-measure and re-set state on every render, forever.
+  const current = useMemo(() => {
+    const base = TOUR[step]
+    return phone && base.phone ? { ...base, ...base.phone } : base
+  }, [step, phone])
 
   useLayoutEffect(() => {
     const update = () => setBox(measure(current.target))

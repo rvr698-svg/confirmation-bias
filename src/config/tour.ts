@@ -24,6 +24,14 @@ export interface TourStep {
   openTarget?: string
   /** Shown under the caption while that panel is still shut. */
   prompt?: string
+  /**
+   * What to say instead where the rail is a summary bar rather than a rail.
+   * On a phone there is no left-hand side and the panels live behind Details,
+   * so a step that says "down the left" is describing a screen that is not
+   * there. Only the first step needs this; the deck and the action bar are in
+   * the same place at every width.
+   */
+  phone?: Pick<TourStep, 'body' | 'openTarget' | 'prompt'>
 }
 
 export const TOUR: TourStep[] = [
@@ -33,6 +41,11 @@ export const TOUR: TourStep[] = [
     body: 'Down the left is the current state of the cycle: your projected intake, the five measures you are scored on, and two panels folded away. Keep an eye on it as the months go by. Start with your team — four named people, and how each of them is getting on.',
     openTarget: '.team-strip',
     prompt: 'Open “The team” to carry on.',
+    phone: {
+      body: 'This line is the state of the cycle: your projected intake, against the target you were handed. Everything else is behind it — the five measures you are scored on, your pipeline, and your team of four named people. Keep an eye on it as the months go by.',
+      openTarget: '.rail-fold',
+      prompt: 'Tap “Details” to carry on.',
+    },
   },
   {
     target: '.deck',
